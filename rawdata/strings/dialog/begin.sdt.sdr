@@ -1,0 +1,7 @@
+{
+	data: {
+		test: "Test!"
+	},
+	
+	compilePath: "strings/dialog/begin.sdt"
+}

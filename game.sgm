@@ -1,0 +1,7 @@
+author=engine #100
+description=standard engine
+name=standard
+screen_height=240
+screen_width=320
+script=game.js
+

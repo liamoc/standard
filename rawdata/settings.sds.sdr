@@ -1,0 +1,9 @@
+{
+	data: {
+		startMap: "begin.rmp",
+		name: "Standard Engine Test",
+		version: "0.0.2a"
+	},
+	
+	compilePath: "settings.sds"
+}

@@ -1,0 +1,11 @@
+{
+	data: {
+		newGame: "New Game",
+		loadGame: "Continue",
+		exitGame: "Exit",
+		
+		compileData: "Compile Data"
+	},
+	
+	compilePath: "strings/title.sdt"
+}
