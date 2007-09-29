@@ -1,4 +1,4 @@
-var SaveManager = Class.extend({
+var SaveManager = Class.extend({ 
 	constructor: null,
 	
 	saveGame: function(path)
@@ -13,10 +13,11 @@ var SaveManager = Class.extend({
 		
 		//TODO: update game state with gameData
 		
+		serializer.close();
 	},
 	
 	loadDefaultGame: function()
 	{
-		this.loadGame("../rawdata/default.sdg");
+		this.loadGame("../data/default.sdg");
 	}
 });
