@@ -1,0 +1,9 @@
+{
+	data: {
+		money: 0,
+		items: [],
+		party: []		
+	},
+	
+	compilePath: "default.sdg"
+}

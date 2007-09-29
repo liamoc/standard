@@ -46,6 +46,7 @@ var TitleScene = Scene.extend({
 	{
 		this.exitTrans.onFinish = function()
 		{
+			SaveManager.loadDefaultGame();
 			Standard.changeScene(new MapScene());
 			Map.change(Settings.get("startMap"));
 		};
