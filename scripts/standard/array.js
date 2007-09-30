@@ -30,6 +30,7 @@ Array.prototype.removeMultiple = function(values)
 	for (var i = 0; i < values.length; i++)
 	{
 		this.splice(this.indexOf(values[i]), 1);
+		i--;
 	}
 }
 
