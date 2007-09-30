@@ -1,6 +1,6 @@
 {
 	data: {
-		image: new SerializedImage("monsters/zombie_demon.png"),
+		image: SerializedResources.image.get("monsters/zombie_demon.png"),
 		name: "Zombie Demon"
 	},
 	

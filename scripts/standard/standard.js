@@ -26,6 +26,7 @@ RequireScript("standard/config.js");
 RequireScript("standard/settings.js");
 RequireScript("standard/map.js");
 RequireScript("standard/serializer.js");
+RequireScript("standard/serializedresources.js");
 RequireScript("standard/savemanager.js");
 RequireScript("standard/movementhandler.js");
 RequireScript("standard/tilemovementhandler.js");

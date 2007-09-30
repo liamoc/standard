@@ -4,7 +4,7 @@
 			money: 0,
 			items: [],
 			characters: [
-				Character("test.sdc")
+				SerializedResources.character.get("test.sdc")
 			]
 		}
 	},

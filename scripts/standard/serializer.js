@@ -554,18 +554,3 @@ SerializerFileWrapper = Class.extend({
 
 SerializerFileWrapper.writeFilter = false;
 SerializerFileWrapper.readFilter = false;
-
-var SerializedImage = Class.extend({
-	constructor: function(fn) { this.filename = fn; },
-	
-	save: function(s)
-	{
-		s.writeRawString(this.filename);
-	},
-	className: "SerializedImage"
-});
-
-SerializedImage.load = function(s)
-{
-	return Cache.getImage(s.readString());
-}
