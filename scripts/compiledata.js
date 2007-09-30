@@ -3,6 +3,15 @@ var CompileLog = OpenLog("compile.log");
 
 function CompileLoadData(file)
 {
+	function Character(path)
+	{
+		return {
+			className: "Character",
+			path: path,
+			save: function(s) { s.write(false); s.write(this.path); }
+		};
+	}
+	
 	var f = OpenRawFile(file);
 	var json = CreateStringFromByteArray(f.read(f.getSize()));
 	return eval('(' + json + ')');

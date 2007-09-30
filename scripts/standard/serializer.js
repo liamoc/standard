@@ -108,6 +108,11 @@ var Serializer = Class.extend({
 	// Writes an object recursively.
 	writeObject: function(object)
 	{
+		if (object.save)
+		{
+			this.writeCustom(object);
+			return;
+		}
 		switch (object.constructor)
 		{
 			case Number:
@@ -135,20 +140,13 @@ var Serializer = Class.extend({
 				this.writeDate(object);
 				break;
 			default:
-				if (object.save)
+				if (object instanceof Object)
 				{
-					this.writeCustom(object);
+					this.writeFObject(object);
 				}
 				else
 				{
-					if (object instanceof Object)
-					{
-						this.writeFObject(object);
-					}
-					else
-					{
-						throw new SerializableException("Unserializable object passed.");
-					}
+					throw new SerializableException("Unserializable object passed.");
 				}
 				break;
 		}

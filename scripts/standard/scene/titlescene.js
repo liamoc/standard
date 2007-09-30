@@ -47,8 +47,14 @@ var TitleScene = Scene.extend({
 		this.exitTrans.onFinish = function()
 		{
 			SaveManager.loadDefaultGame();
+			
+			CreatePerson("hero", Party.characters[0].spriteset_path, false);
+			Standard.attachInput("hero");
+		
 			Standard.changeScene(new MapScene());
 			Map.change(Settings.get("startMap"));
+			
+			
 		};
 		Screen.attach(9, this.exitTrans);		
 	},

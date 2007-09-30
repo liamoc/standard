@@ -10,9 +10,11 @@ var SaveManager = Class.extend({
 	{
 		var serializer = new Serializer(path);
 		var gameData = serializer.read();
-		
 		//TODO: update game state with gameData
 		
+		Party.characters = gameData.party.characters;
+		Party.money = gameData.party.money;
+		Party.items = gameData.party.items;
 		serializer.close();
 	},
 	

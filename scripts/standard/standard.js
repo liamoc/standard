@@ -27,6 +27,10 @@ RequireScript("standard/settings.js");
 RequireScript("standard/map.js");
 RequireScript("standard/serializer.js");
 RequireScript("standard/savemanager.js");
+RequireScript("standard/movementhandler.js");
+RequireScript("standard/tilemovementhandler.js");
+RequireScript("standard/party.js");
+RequireScript("standard/character.js");
 
 
 // Include all the Screen objects
@@ -60,6 +64,10 @@ var Standard = Class.extend({
 	nrt: false,
 
 	particleEngine: GetParticleEngine(),
+	
+	movementHandler: new TileMovementHandler(),
+
+	inputPerson: false,
 
 	game: function()
 	{
@@ -70,9 +78,21 @@ var Standard = Class.extend({
 		BindKey(KEY_DOWN, "", "");
 		BindKey(KEY_LEFT, "", "");
 		BindKey(KEY_RIGHT, "", "");
+		
 		SetUpdateScript("Standard.update()");
 		SetRenderScript("Standard.render()");
 		MapEngine("entry.rmp", 60);
+	},
+	
+	attachInput: function(person)
+	{
+		AttachInput(person);
+		this.inputPerson = person;
+	},
+	
+	detachInput: function()
+	{
+		DetachInput();
 	},
 	
 	currentScene: false,
@@ -119,6 +139,10 @@ var Standard = Class.extend({
 			{
 				this.inputs[this.inputs.length - 1].acceptKey(GetKey());
 			}
+		}
+		else
+		{
+			this.movementHandler.update();
 		}
 	},
 	
