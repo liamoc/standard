@@ -40,6 +40,7 @@ RequireScript("standard/screenobjects/fadeouttransition.js");
 RequireScript("standard/screenobjects/menupointer.js");
 RequireScript("standard/screenobjects/boxmenupointer.js");
 RequireScript("standard/screenobjects/particlemenupointer.js");
+RequireScript("standard/screenobjects/arrowmenupointer.js");
 RequireScript("standard/screenobjects/window.js");
 RequireScript("standard/screenobjects/menu.js");
 

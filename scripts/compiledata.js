@@ -38,4 +38,10 @@ function CompileFile(path)
 	serializer.close();
 }
 
-CompileData();
+function game()
+{
+	CompileData();
+	GetSystemFont().drawText(0, 0, "All files compiled. Press any key.");
+	FlipScreen();
+	GetKey();
+}
