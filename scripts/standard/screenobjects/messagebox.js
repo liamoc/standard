@@ -3,7 +3,7 @@ var MessageBox = Window.extend({
 	wrapped_lines: "",
 	constructor: function(text)
 	{
-		this.base(16, 16, 288, 60);
+		this.base(16, 16, 288, 60, false);
 		
 		this.text = text;
 		

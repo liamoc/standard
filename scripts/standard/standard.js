@@ -10,6 +10,7 @@
 
 RequireScript("standard/spheritype.js");	// Include Kamatsu's Spheritype library
 RequireScript("standard/array.js"); // array extensions
+RequireScript("standard/string.js"); // string extensions
 
 // Include some core objects
 RequireScript("standard/screen.js");
@@ -48,6 +49,7 @@ RequireScript("standard/screenobjects/particlemenupointer.js");
 RequireScript("standard/screenobjects/arrowmenupointer.js");
 RequireScript("standard/screenobjects/window.js");
 RequireScript("standard/screenobjects/menu.js");
+RequireScript("standard/screenobjects/messagebox.js");
 
 // Include all the Scene objects
 RequireScript("standard/scene/scene.js");
