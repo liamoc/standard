@@ -62,6 +62,7 @@ var TitleScene = Scene.extend({
 	menuSetup: function()
 	{
 		EvaluateScript("compiledata.js");
+		CompileData();
 	},
 	
 	menuContinue: function()

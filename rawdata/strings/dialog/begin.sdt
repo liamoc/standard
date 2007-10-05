@@ -1,7 +1,7 @@
 {
 	data: {
 		test: "Test!",
-		test_msg: "This is an extended test message to test out the MessageBox class. It should wrap properly and look cool and stuff."
+		test_msg: "This is an extended test message to test out the MessageBox class. It should wrap properly and look cool and stuff. It should be four lines long when fully displayed."
 	},
 	
 	compilePath: "strings/dialog/begin.sdt"
