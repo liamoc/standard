@@ -58,6 +58,7 @@ RequireScript("standard/screenobjects/messagebox.js");
 RequireScript("standard/scene/scene.js");
 RequireScript("standard/scene/titlescene.js");
 RequireScript("standard/scene/mapscene.js");
+RequireScript("standard/scene/loadgamescene.js");
 
 
 // The main engine object.

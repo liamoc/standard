@@ -67,6 +67,8 @@ var TitleScene = Scene.extend({
 	
 	menuContinue: function()
 	{
+		this.exitTrans.onFinish = function() { Standard.changeScene(new LoadGameScene()); };
+		Screen.attach(9, this.exitTrans);
 	},
 	
 	menuExit: function()

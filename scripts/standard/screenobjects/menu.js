@@ -13,20 +13,29 @@ var Menu = Window.extend({
 	constructor: function(x, y, w, h, transparent)
 	{
 		this.base(x, y, w, h, transparent);
+		this.items = [];
+		this.selected = 0;
+		this.position = 0;
+		this.acceptsInput = true;
+		this.result = null;
+		this.results = [];
+		this.onFinish = false;
+		this.finished = false;
+		this.pointer = new BoxMenuPointer();
 	},
 	
 	onAdd: function()
 	{
 		this.base();
-		Screen.attach(7, this.pointer);
-		var late_this = this;
-		
+		if (this.pointer.standalone) Screen.attach(7, this.pointer);
+		else this.pointer.onAdd();	// simulate
 	},
 	
 	onRemove: function()
 	{
 		this.base();
-		Screen.detach(this.pointer);
+		if (this.pointer.standalone) Screen.detach(this.pointer);
+		else this.pointer.onRemove();
 	},
 	
 	addItem: function(item, result)
@@ -83,6 +92,7 @@ var Menu = Window.extend({
 	
 	renderContent: function()
 	{
+		if (!this.pointer.standalone) this.pointer.render();
 		var yOffset = 0;
 		var first = this.getFirstIndexInView();
 		var max = this.getMaxViewable();
@@ -149,8 +159,6 @@ var MenuItem = Class.extend({
 });
 
 var TextMenuItem = MenuItem.extend({
-	h: Resources.fonts.standard.getHeight(),
-	
 	text: "",
 	align: ALIGN_LEFT,
 	selectedColor: false,

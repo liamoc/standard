@@ -13,6 +13,7 @@ var MenuPointer = ScreenObject.extend({
 	hd: 0,
 	moveTime: 7,
 	moveTimeLeft: 0,
+	standalone: true,
 	
 	constructor: function(x, y, w, h)
 	{

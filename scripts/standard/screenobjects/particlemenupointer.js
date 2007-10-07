@@ -37,6 +37,7 @@ var ParticleMenuPointer = MenuPointer.extend({
 	{
 		this.system.max = 80;
 		this.system.max = 450;
+		if (!this.x) Abort(DumpObject(this));
 		this.system.x = this.x;
 		this.system.y = this.y + this.h / 2 - 4;
 		this.system.initializer.setArea(PE_SQUARE, 0, this.w, -4, 4);

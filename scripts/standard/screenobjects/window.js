@@ -20,9 +20,9 @@ var Window = ScreenObject.extend({
 	render: function()
 	{
 		if (!this.transparent) Resources.windows.standard.drawWindow(this.x, this.y, this.w, this.h);
-		SetClippingRectangle(this.x, this.y, this.w, this.h);
+		//SetClippingRectangle(this.x, this.y, this.w, this.h);
 		this.renderContent();
-		SetClippingRectangle(0, 0, 320, 240);
+		//SetClippingRectangle(0, 0, 320, 240);
 	},
 	renderContent: function()
 	{

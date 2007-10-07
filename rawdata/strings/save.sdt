@@ -1,0 +1,12 @@
+{
+	data: {
+		load_choose: "Choose a save file to load.",
+		save_choose: "Choose a file to save your game.",
+		save_confirm: "This file is in use. Overwrite?",
+		save_confirm_yes: "Yes",
+		save_confirm_no: "No",
+		loading: "Loading..."
+	},
+	
+	compilePath: "strings/save.sdt"
+}
