@@ -3,7 +3,18 @@ var SaveManager = Class.extend({
 	
 	saveGame: function(path)
 	{
-		//TODO: save game
+		var serializer = new Serializer(path);
+		serializer.write(
+			{
+				party: {
+					characters: Party.characters,
+					money: Party.money,
+					items: Party.items
+				},
+				
+				state: State
+			}
+		);
 	},
 	
 	loadGame: function(path)
@@ -15,6 +26,7 @@ var SaveManager = Class.extend({
 		Party.characters = gameData.party.characters;
 		Party.money = gameData.party.money;
 		Party.items = gameData.party.items;
+		State = gameData.state;
 		serializer.close();
 	},
 	

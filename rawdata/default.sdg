@@ -6,6 +6,10 @@
 			characters: [
 				SerializedResources.character.get("test.sdc")
 			]
+		},
+		
+		state: {
+			
 		}
 	},
 	
