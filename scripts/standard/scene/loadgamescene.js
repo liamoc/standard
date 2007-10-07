@@ -2,12 +2,15 @@ var LoadGameScene = Scene.extend({
 	menu: false,
 	exitTrans: false,
 	loadingIndex: 0,
+	saveSlots: 0,
 	constructor: function()
 	{
+		this.saveSlots = Settings.get("saveSlots");
 		Strings.loadTable("save");
 		this.menu = new Menu(32, 48, 256, 160);
 		this.menu.pointer = new BoxMenuPointer();
-		this.menu.pointer.padding = [4, 4, 4, 4];
+		this.menu.pointer.padding = [2, 2, 2, 2];
+		this.menu.pointer.border = false;
 		var bind_this = this;
 		this.menu.onFinish = function() { bind_this.menuFinished.call(bind_this); }
 		this.exitTrans = new FadeOutTransition();
@@ -15,7 +18,7 @@ var LoadGameScene = Scene.extend({
 		this.exitTrans.generateImage();
 		this.exitTrans.image.blendmode = ADD;
 		this.loadingWindow = new LoadingWindow();
-		this.loadingWindow.max = 10;
+		this.loadingWindow.max = this.saveSlots;
 		this.loadingWindow.value = 0;
 	},
 	
@@ -27,7 +30,7 @@ var LoadGameScene = Scene.extend({
 	onLeave: function()
 	{
 		Strings.unloadTable("save");
-		Strings.detach(this.menu);
+		Screen.detach(this.menu);
 	},
 	
 	onEnter: function()
@@ -37,7 +40,16 @@ var LoadGameScene = Scene.extend({
 		Screen.attach(6, this.loadingWindow);
 		Standard.addTimer(this, this.load_next, 1);
 	},
-	
+	menuFinished: function()
+	{
+		var trans = new FadeOutTransition();
+		var bind_this = this;
+		trans.onFinish = function()
+		{
+			SaveManager.loadGame("../save/" + new String(bind_this.menu.result + 1).numericPad(2) + ".sdg");
+		}
+		Screen.attach(9, trans);
+	},
 	load_next: function()
 	{
 		var path = "../save/" + new String(this.loadingIndex + 1).numericPad(2) + ".sdg";
@@ -54,7 +66,7 @@ var LoadGameScene = Scene.extend({
 		}
 		this.loadingIndex++;
 		this.loadingWindow.value = this.loadingIndex;
-		if (this.loadingIndex == 10)
+		if (this.loadingIndex == this.saveSlots)
 		{
 			Standard.removeTimer(this, this.load_next);
 		
@@ -78,6 +90,10 @@ var LoadGameMenuItem = MenuItem.extend({
 	
 	renderAt: function(x, y, w, selected)
 	{
+		/*if (selected)
+		{
+			Rectangle(x, y, w, this.h, Resources.colors.black20);
+		}*/
 		Resources.fonts.large.setColorMask(Resources.colors.white20);
 		Resources.fonts.large.drawText(x, y + this.h / 2 - Resources.fonts.large.getHeight() / 2, this.index);
 		if (!this.block)
@@ -88,7 +104,22 @@ var LoadGameMenuItem = MenuItem.extend({
 		else
 		{
 			Resources.fonts.standard.setColorMask(Resources.colors.white);
-			Resources.fonts.standard.drawText(x + w / 2 - Resources.fonts.standard.getStringWidth("THERE IS DATA HERE") / 2, y + this.h / 2 - Resources.fonts.standard.getHeight() / 2, "THERE IS DATA HERE");
+			
+			// Draw location
+			var location_w = Resources.fonts.standard.getStringWidth(this.block.location);
+			var location_x = x + w - 100;
+			var location_y = y + this.h - 18;
+			Resources.fonts.standard.drawText(x + w - Resources.fonts.standard.getStringWidth(this.block.location), location_y, this.block.location);
+			
+			GradientLine(location_x, location_y - 3, x + w + 2, location_y - 3, Resources.colors.wswhite, Resources.colors.wswhite0);
+			
+			// Level
+			Resources.fonts.standard.drawText(x + w - Resources.fonts.standard.getStringWidth("Lv. 00"), y, "Lv. " + new String(this.block.partyLevels[0]).numericPad(2));
+			
+			// Name
+			Resources.fonts.standard.drawText(location_x, y, this.block.partyNames[0]);
 		}
+		
+		//Line(x - 2, y + this.h + 3, x + w + 2, y + this.h + 3, Resources.colors.wswhite);
 	}
 });

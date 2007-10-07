@@ -57,6 +57,7 @@ var Serializer = Class.extend({
 		this.versionBytes[3] = 0x02;
 		this.self = this;
 		this.path = path;
+		this.customTypes = [];
 	},
 	
 	// Write an object to the file. This sets the mode to SERIALIZER_MODE_WRITE.

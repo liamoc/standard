@@ -185,6 +185,7 @@ var Standard = Class.extend({
 	addInput: function(object)
 	{
 		this.inputs.push(object);
+		DetachInput();
 	},
 	
 	removeInput: function(object)

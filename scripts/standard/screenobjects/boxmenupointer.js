@@ -1,5 +1,6 @@
 var BoxMenuPointer = MenuPointer.extend({
 	padding: [0, 0, 0, 0],
+	border: true,
 	
 	constructor: function(x, y, w, h)
 	{
@@ -9,6 +10,9 @@ var BoxMenuPointer = MenuPointer.extend({
 	render: function()
 	{
 		Rectangle(this.x - this.padding[3], this.y - this.padding[0], this.w + this.padding[3] + this.padding[1], this.h + this.padding[0] + this.padding[2], CreateColor(25, 50, 127, 120));
-		OutlinedRectangle(this.x - this.padding[3], this.y - this.padding[0], this.w + this.padding[3] + this.padding[1], this.h + this.padding[0] + this.padding[2], CreateColor(242, 243, 249, 180));
+		if (this.border)
+		{
+			OutlinedRectangle(this.x - this.padding[3], this.y - this.padding[0], this.w + this.padding[3] + this.padding[1], this.h + this.padding[0] + this.padding[2], CreateColor(242, 243, 249, 180));
+		}
 	}
 });
