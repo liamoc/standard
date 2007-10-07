@@ -33,6 +33,8 @@ RequireScript("standard/movementhandler.js");
 RequireScript("standard/tilemovementhandler.js");
 RequireScript("standard/party.js");
 RequireScript("standard/character.js");
+RequireScript("standard/files.js");
+RequireScript("standard/path.js");
 
 
 // Include all the Screen objects
@@ -82,8 +84,13 @@ var Standard = Class.extend({
 		BindKey(KEY_LEFT, "", "");
 		BindKey(KEY_RIGHT, "", "");
 		
+		SetTalkActivationKey(Config.controls.accept);
+		
 		SetUpdateScript("Standard.update()");
 		SetRenderScript("Standard.render()");
+		
+		Map.init();
+		
 		MapEngine("entry.rmp", 60);
 	},
 	
