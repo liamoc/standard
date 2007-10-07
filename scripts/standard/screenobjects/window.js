@@ -8,6 +8,8 @@ var Window = ScreenObject.extend({
 	w: 0,
 	h: 0,
 	transparent: false,
+	closePixelsPerFrame: 0,
+	clipContents: false,
 	
 	constructor: function(x, y, w, h, transparent)
 	{
@@ -20,11 +22,26 @@ var Window = ScreenObject.extend({
 	render: function()
 	{
 		if (!this.transparent) Resources.windows.standard.drawWindow(this.x, this.y, this.w, this.h);
-		//SetClippingRectangle(this.x, this.y, this.w, this.h);
+		if (this.clipContents) SetClippingRectangle(this.x, this.y, this.w, this.h);
 		this.renderContent();
-		//SetClippingRectangle(0, 0, 320, 240);
+		if (this.clipContents) SetClippingRectangle(0, 0, 320, 240);
 	},
 	renderContent: function()
 	{
+	},
+	
+	close: function()
+	{
+		Standard.addTimer(this, this.continueClose, 1);
+		this.closePixelsPerFrame = this.h / 10;
+	},
+	
+	continueClose: function()
+	{
+		if ((this.h -= this.closePixelsPerFrame) <= 0)
+		{
+			Standard.removeTimer(this, this.continueClose);
+			Screen.detach(this);
+		}
 	}
 });

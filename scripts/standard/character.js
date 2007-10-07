@@ -20,7 +20,17 @@ var Character = Class.extend({
 			this.spriteset_path = data.spriteset_path;
 			s.close();
 		}
-	}
+	},
+	
+	save: function(s)
+	{
+		s.write(true);
+		s.write(this.name);
+		s.write(this.stats);
+		s.write(this.spriteset_path);
+	},
+	
+	className: "Character"
 });
 
 Character.load = function(s)

@@ -9,7 +9,7 @@
 		},
 		
 		state: {
-			
+			saveCount: 0
 		}
 	},
 	

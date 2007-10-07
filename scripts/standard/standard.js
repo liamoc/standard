@@ -53,6 +53,7 @@ RequireScript("standard/screenobjects/arrowmenupointer.js");
 RequireScript("standard/screenobjects/window.js");
 RequireScript("standard/screenobjects/menu.js");
 RequireScript("standard/screenobjects/messagebox.js");
+RequireScript("standard/screenobjects/loadingwindow.js");
 
 // Include all the Scene objects
 RequireScript("standard/scene/scene.js");

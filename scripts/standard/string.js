@@ -40,3 +40,20 @@ String.prototype.wrap = function(font, width, perpage)
 	if (line != '') lines.push(line);
 	return lines;
 }
+
+String.prototype.format = function()
+{
+	var new_string = this;
+	for (var i = 0; i < arguments.length; i++)
+	{
+		new_string = new_string.replace("{" + i + "}", arguments[i]);
+	}
+	return new_string;
+}
+
+String.prototype.numericPad = function(len)
+{
+	var s = this;
+	while (s.length < len) s = "0" + s;
+	return s;
+}
