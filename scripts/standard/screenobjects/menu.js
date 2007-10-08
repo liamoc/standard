@@ -4,6 +4,8 @@ var Menu = Window.extend({
 	selected: 0,
 	position: 0,
 	acceptsInput: true,
+	canceled: false,
+	allowCancel: true,
 	result: null,
 	results: [],
 	onFinish: false,
@@ -119,6 +121,14 @@ var Menu = Window.extend({
 				if (!this.items[this.selected].disabled)
 				{
 					this.result = this.results[this.selected];
+					this.finished = true;
+					if (this.onFinish) this.onFinish();
+				}
+				break;
+			case Config.controls.cancel:
+				if (this.allowCancel)
+				{
+					this.canceled = true;
 					this.finished = true;
 					if (this.onFinish) this.onFinish();
 				}

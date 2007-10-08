@@ -12,7 +12,7 @@ var LoadGameScene = Scene.extend({
 		this.menu.pointer.padding = [2, 2, 2, 2];
 		this.menu.pointer.border = false;
 		var bind_this = this;
-		this.menu.onFinish = function() { bind_this.menuFinished.call(bind_this); }
+		this.menu.onFinish = function() { if (bind_this.menu.canceled) bind_this.backToMenu(); else bind_this.menuFinished.call(bind_this); }
 		this.exitTrans = new FadeOutTransition();
 		this.exitTrans.color = CreateColor(255, 255, 255, 0);
 		this.exitTrans.generateImage();
@@ -40,15 +40,23 @@ var LoadGameScene = Scene.extend({
 		Screen.attach(6, this.loadingWindow);
 		Standard.addTimer(this, this.load_next, 1);
 	},
-	menuFinished: function()
+	backToMenu: function()
 	{
 		var trans = new FadeOutTransition();
-		var bind_this = this;
 		trans.onFinish = function()
+		{
+			Standard.changeScene(new TitleScene());
+		};
+		Screen.attach(9, trans);
+	},
+	menuFinished: function()
+	{
+		var bind_this = this;
+		this.exitTrans.onFinish = function()
 		{
 			SaveManager.loadGame("../save/" + new String(bind_this.menu.result + 1).numericPad(2) + ".sdg");
 		}
-		Screen.attach(9, trans);
+		Screen.attach(9, this.exitTrans);
 	},
 	load_next: function()
 	{
@@ -85,6 +93,7 @@ var LoadGameMenuItem = MenuItem.extend({
 	{
 		this.block = block;
 		this.index = index;
+		if (!this.block) this.disabled = true;
 		this.noSaveText = Strings.get("no_save", "save");
 	},
 	
