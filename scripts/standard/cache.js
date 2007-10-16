@@ -18,6 +18,16 @@ var Cache = Class.extend({
 			this.spritesets[fn] = new CacheObject(LoadSpriteset(fn));
 		}
 		return this.spritesets[fn].getObject();
+	},
+	
+	sounds: {},
+	getSound: function(fn)
+	{
+		if (!this.sounds[fn])
+		{
+			this.sounds[fn] = new CacheObject(LoadSound(fn));
+		}
+		return this.sounds[fn].getObject();
 	}
 });
 

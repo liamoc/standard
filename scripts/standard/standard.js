@@ -37,6 +37,7 @@ RequireScript("standard/character.js");
 RequireScript("standard/files.js");
 RequireScript("standard/path.js");
 RequireScript("standard/state.js");
+RequireScript("standard/sounds.js");
 
 
 // Include all the Screen objects
@@ -94,6 +95,7 @@ var Standard = Class.extend({
 		SetRenderScript("Standard.render()");
 		
 		Map.init();
+		Sounds.loadEffectMapping();
 		
 		MapEngine("entry.rmp", 60);
 	},

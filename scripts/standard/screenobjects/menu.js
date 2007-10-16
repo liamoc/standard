@@ -5,7 +5,7 @@ var Menu = Window.extend({
 	position: 0,
 	acceptsInput: true,
 	canceled: false,
-	allowCancel: true,
+	allowCancel: false,
 	result: null,
 	results: [],
 	onFinish: false,
@@ -120,14 +120,20 @@ var Menu = Window.extend({
 			case Config.controls.accept:
 				if (!this.items[this.selected].disabled)
 				{
+					Sounds.play("accept");
 					this.result = this.results[this.selected];
 					this.finished = true;
 					if (this.onFinish) this.onFinish();
+				}
+				else
+				{
+					Sounds.play("error");
 				}
 				break;
 			case Config.controls.cancel:
 				if (this.allowCancel)
 				{
+					Sounds.play("error");
 					this.canceled = true;
 					this.finished = true;
 					if (this.onFinish) this.onFinish();
