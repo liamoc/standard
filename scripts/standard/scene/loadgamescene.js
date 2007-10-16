@@ -6,6 +6,7 @@ var LoadGameScene = Scene.extend({
 	constructor: function()
 	{
 		this.saveSlots = Settings.get("saveSlots");
+		this.loadingIndex = 0;
 		Strings.loadTable("save");
 		this.menu = new Menu(32, 48, 256, 160);
 		this.menu.pointer = new BoxMenuPointer();

@@ -5,7 +5,7 @@ var TitleScene = Scene.extend({
 	constructor: function()
 	{
 		Strings.loadTable("title");
-		this.background = false;
+		this.background = new TitleBackground();
 		this.menu = new Menu(110, 20, 100, Resources.fonts.standard.getHeight() * 3, true);
 		this.menu.pointer = new ParticleMenuPointer();
 		this.menu.addItem(new TextMenuItem(Strings.get("newGame", "title"), ALIGN_CENTER), this.menuNewGame);
@@ -32,7 +32,10 @@ var TitleScene = Scene.extend({
 	},
 	onLeave: function()
 	{
-		Screen.detach(this.background);
+		if (this.background)
+		{
+			Screen.detach(this.background);
+		}
 		Screen.detach(this.menu);
 		Strings.unloadTable("title");
 	},
