@@ -20,7 +20,7 @@
 		talk: function()
 		{
 			State.saveCount++;
-			
+			Party.characters[0].stats.level = Random(1, 99);
 			this.menu = new Menu(20, 20, 60, 140);
 			for (var i = 0; i < 20; i++)
 			{

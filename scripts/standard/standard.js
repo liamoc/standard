@@ -11,6 +11,7 @@
 RequireScript("standard/spheritype.js");	// Include Kamatsu's Spheritype library
 RequireScript("standard/array.js"); // array extensions
 RequireScript("standard/string.js"); // string extensions
+RequireScript("standard/common.js"); // common functions
 
 // Include some core objects
 RequireScript("standard/screen.js");
@@ -193,13 +194,3 @@ var Standard = Class.extend({
 		this.inputs.remove(object);
 	}
 });
-
-function DumpObject(o)
-{
-	var s = "";
-	for (var i in o)
-	{
-		s += i + ": " + o[i] + "\n";
-	}
-	return s;
-}
