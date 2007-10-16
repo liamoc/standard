@@ -10,7 +10,7 @@ var SaveManager = Class.extend({
 		partyLevels = [];
 		for (var i = 0; i < Party.characters.length; i++)
 		{
-			partyImages[i] = false;
+			partyImages[i] = Party.characters[i].spriteset_path;
 			partyNames[i] = Party.characters[i].name;
 			partyLevels[i] = Party.characters[i].stats.level;
 		}

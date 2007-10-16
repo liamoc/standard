@@ -4,7 +4,10 @@
 			money: 0,
 			items: [],
 			characters: [
-				SerializedResources.character.get("test.sdc")
+				SerializedResources.character.get("locke.sdc"),
+				SerializedResources.character.get("locke.sdc"),
+				SerializedResources.character.get("locke.sdc"),
+				SerializedResources.character.get("locke.sdc")
 			]
 		},
 		

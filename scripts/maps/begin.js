@@ -22,7 +22,7 @@
 			State.saveCount++;
 			
 			this.menu = new Menu(20, 20, 60, 140);
-			for (var i = 0; i < 10; i++)
+			for (var i = 0; i < 20; i++)
 			{
 				this.menu.addItem(new TextMenuItem(Strings.get("save_list_item").format(i + 1), ALIGN_LEFT), i);
 			}

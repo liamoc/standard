@@ -8,6 +8,16 @@ var Cache = Class.extend({
 			this.images[fn] = new CacheObject(LoadImage(fn));
 		}
 		return this.images[fn].getObject();
+	},
+	
+	spritesets: {},
+	getSpriteset: function(fn)
+	{
+		if (!this.spritesets[fn])
+		{
+			this.spritesets[fn] = new CacheObject(LoadSpriteset(fn));
+		}
+		return this.spritesets[fn].getObject();
 	}
 });
 

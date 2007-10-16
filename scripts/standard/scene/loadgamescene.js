@@ -3,6 +3,7 @@ var LoadGameScene = Scene.extend({
 	exitTrans: false,
 	loadingIndex: 0,
 	saveSlots: 0,
+	
 	constructor: function()
 	{
 		this.saveSlots = Settings.get("saveSlots");
@@ -96,6 +97,14 @@ var LoadGameMenuItem = MenuItem.extend({
 		this.index = index;
 		if (!this.block) this.disabled = true;
 		this.noSaveText = Strings.get("no_save", "save");
+		this.sprites = [];
+		if (this.block)
+		{
+			for (var i = 0; i < this.block.partyImages.length; i++)
+			{
+				this.sprites.push(Cache.getSpriteset(block.partyImages[i]));
+			}
+		}
 	},
 	
 	renderAt: function(x, y, w, selected)
@@ -105,7 +114,7 @@ var LoadGameMenuItem = MenuItem.extend({
 			Rectangle(x, y, w, this.h, Resources.colors.black20);
 		}*/
 		Resources.fonts.large.setColorMask(Resources.colors.white20);
-		Resources.fonts.large.drawText(x, y + this.h / 2 - Resources.fonts.large.getHeight() / 2, this.index);
+		Resources.fonts.large.drawText(x, y + this.h / 2 - Resources.fonts.large.getHeight() / 2, new String(this.index).numericPad(2));
 		if (!this.block)
 		{
 			Resources.fonts.standard.setColorMask(Resources.colors.white50);
@@ -114,6 +123,11 @@ var LoadGameMenuItem = MenuItem.extend({
 		else
 		{
 			Resources.fonts.standard.setColorMask(Resources.colors.white);
+			
+			for (var i = 0; i < this.sprites.length; i++)
+			{
+				this.sprites[i].images[0].blit(x + 44 + i * 28, y + 8);
+			}
 			
 			// Draw location
 			var location_w = Resources.fonts.standard.getStringWidth(this.block.location);

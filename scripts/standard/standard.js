@@ -5,7 +5,7 @@
  * 2007 Engine #100
  * Licensed under Creative Commons Attribution-Noncommercial-Share Alike 2.0 UK: England & Wales
  * http://creativecommons.org/licenses/by-nc-sa/2.0/uk/
- * Excepting the Kamatsu's Spheritype library, which is not part of this engine.
+ * Excepting the Kamatsu's Spheritype library, which is not part of this engine, and some bundled resources which are used for testing purposes only.
  */
 
 RequireScript("standard/spheritype.js");	// Include Kamatsu's Spheritype library
