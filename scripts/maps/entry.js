@@ -1,7 +1,11 @@
 {
 	enter: function()
 	{
-		var title = new TitleScene();
-		Standard.changeScene(title);
+		if (!State.started)
+		{
+			State.started = true;
+			var title = new TitleScene();
+			Standard.changeScene(title);
+		}
 	}
 }

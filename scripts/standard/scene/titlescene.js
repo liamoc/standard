@@ -4,7 +4,9 @@ var TitleScene = Scene.extend({
 	
 	constructor: function()
 	{
+		this.base();
 		Strings.loadTable("title");
+		this.cb = new ColorBlock(CreateColor(0, 0, 0));
 		this.background = new TitleBackground();
 		this.menu = new Menu(110, 20, 100, Resources.fonts.standard.getHeight() * 3, true);
 		this.menu.pointer = new ParticleMenuPointer();
@@ -24,21 +26,26 @@ var TitleScene = Scene.extend({
 	},
 	onEnter: function()
 	{	
+		Screen.attach(0, this.cb);
 		Screen.attach(9, new FadeInTransition());
 		Screen.attach(8, this.menu);
 		if (this.background)
 		{
 			Screen.attach(5, this.background);
 		}
+		if (GetCurrentMap() != "entry.rmp") Map.change("entry.rmp");
+		this.base();
 	},
 	onLeave: function()
 	{
+		Screen.detach(this.cb);
 		if (this.background)
 		{
 			Screen.detach(this.background);
 		}
 		Screen.detach(this.menu);
 		Strings.unloadTable("title");
+		this.base();
 	},
 	
 	menuFinished: function()
@@ -51,10 +58,11 @@ var TitleScene = Scene.extend({
 		this.exitTrans.onFinish = function()
 		{
 			SaveManager.loadDefaultGame();
-			
-			CreatePerson("hero", Party.characters[0].spriteset_path, false);
+			if (!PersonExists("hero"))
+			{
+				CreatePerson("hero", Party.characters[0].spriteset_path, false);
+			}
 			Standard.attachInput("hero");
-		
 			Standard.changeScene(new MapScene());
 			Map.change(Settings.get("startMap"));
 			

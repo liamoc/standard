@@ -6,6 +6,7 @@ var LoadGameScene = Scene.extend({
 	
 	constructor: function()
 	{
+		this.cb = new ColorBlock(CreateColor(0, 0, 0));
 		this.saveSlots = Settings.get("saveSlots");
 		this.loadingIndex = 0;
 		Strings.loadTable("save");
@@ -33,12 +34,14 @@ var LoadGameScene = Scene.extend({
 	
 	onLeave: function()
 	{
+		Screen.detach(this.cb);
 		Strings.unloadTable("save");
 		Screen.detach(this.menu);
 	},
 	
 	onEnter: function()
 	{
+		Screen.attach(0, this.cb);
 		Screen.attach(9, new FadeInTransition());
 		//Screen.attach(5, this.menu);
 		Screen.attach(6, this.loadingWindow);

@@ -33,5 +33,24 @@
 			});
 			eq.start();
 		}
+	},
+	
+	test_2: {
+		talk: function()
+		{
+			var eq = new EventQueue();
+			
+			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu"]]);
+			eq.add(function()
+			{
+				switch (State.lastChoice)
+				{
+					case 1:
+						Standard.changeScene(new TitleScene());
+						break;
+				}
+			});
+			eq.start();
+		}
 	}
 }

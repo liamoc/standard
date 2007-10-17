@@ -79,7 +79,10 @@ var SaveManager = Class.extend({
 		if (!basic)
 		{
 			SetTalkActivationKey(Config.controls.accept);
-			CreatePerson("hero", Party.characters[0].spriteset_path, false);
+			if (!PersonExists("hero"))
+			{
+				CreatePerson("hero", Party.characters[0].spriteset_path, false);
+			}
 			Standard.attachInput("hero");
 		
 			Standard.changeScene(new MapScene());

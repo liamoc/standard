@@ -12,3 +12,8 @@ function DumpObject(o)
 	}
 	return s;
 }
+
+function PersonExists(p)
+{
+	return GetPersonList().contains(p);
+}

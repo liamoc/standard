@@ -195,6 +195,6 @@ var Standard = Class.extend({
 	removeInput: function(object)
 	{
 		this.inputs.remove(object);
-		if (!this.inputs.length) AttachInput(this.inputPerson);
+		if (!this.inputs.length && this.inputPerson) AttachInput(this.inputPerson);
 	}
 });
