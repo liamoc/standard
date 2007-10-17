@@ -8,6 +8,7 @@ var TitleScene = Scene.extend({
 		this.background = new TitleBackground();
 		this.menu = new Menu(110, 20, 100, Resources.fonts.standard.getHeight() * 3, true);
 		this.menu.pointer = new ParticleMenuPointer();
+		this.menu.autoClose = false;
 		this.menu.addItem(new TextMenuItem(Strings.get("newGame", "title"), ALIGN_CENTER), this.menuNewGame);
 		this.menu.addItem(new TextMenuItem(Strings.get("loadGame", "title"), ALIGN_CENTER), this.menuContinue);
 		this.menu.addItem(new TextMenuItem(Strings.get("exitGame", "title"), ALIGN_CENTER), this.menuExit);

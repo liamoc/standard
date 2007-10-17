@@ -1,8 +1,0 @@
-{
-	data: {
-		accept: "vhit01.mp3",
-		error: "vhit02.mp3"
-	},
-	
-	compilePath: "effects.sdt"
-}

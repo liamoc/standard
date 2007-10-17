@@ -38,6 +38,7 @@ RequireScript("standard/files.js");
 RequireScript("standard/path.js");
 RequireScript("standard/state.js");
 RequireScript("standard/sounds.js");
+RequireScript("standard/event.js");
 
 
 // Include all the Screen objects

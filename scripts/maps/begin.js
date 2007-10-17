@@ -1,42 +1,37 @@
 {
-	msg: false,
-	menu: false,
-	
 	enter: function()
 	{
 		if (!State.displayedMessage)
 		{
-			this.msg = new MessageBox(Strings.get("test_msg"));
-			Screen.attach(5, this.msg);
+			var eq = new EventQueue();
+			eq.add(Event.messageBox, [Strings.get("test_msg")]);
+			eq.add(Event.messageBox, [Strings.get("test_msg2").format(Party.characters[0].name)]);
+			eq.start();
+			State.displayedMessage = true;
 		}
 	},
 	
 	leave: function()
 	{
-		if (this.msg) Screen.detach(this.msg);
+		
 	},
 	
 	test_1: {
 		talk: function()
 		{
-			State.saveCount++;
-			Party.characters[0].stats.level = Random(1, 99);
-			this.menu = new Menu(20, 20, 60, 140);
-			for (var i = 0; i < 20; i++)
+			var eq = new EventQueue();
+			
+			var list = [];
+			for (var i = 1; i <= 20; i++)
 			{
-				this.menu.addItem(new TextMenuItem(Strings.get("save_list_item").format(i + 1), ALIGN_LEFT), i);
+				list.push(Strings.get("save_list_item").format(i));
 			}
-			var late_this = this;
-			this.menu.onFinish = function()
+			eq.add(Event.messageBoxChoice, [Strings.get("choose"), list]);
+			eq.add(function()
 			{
-				State.displayedMessage = true;
-				Screen.detach(late_this.menu);
-				SaveManager.saveGame("../save/" + new String(late_this.menu.result + 1).numericPad(2) + ".sdg");
-				if (this.msg) Screen.detach(late_this.msg);
-				late_this.msg = new MessageBox(Strings.get("test_msg_2").format(State.saveCount));
-				Screen.attach(5, late_this.msg);
-			};
-			Screen.attach(5, this.menu);
+				SaveManager.saveGame("../save/" + new String(State.lastChoice + 1).numericPad(2) + ".sdg");
+			});
+			eq.start();
 		}
 	}
 }

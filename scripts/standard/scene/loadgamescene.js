@@ -11,6 +11,7 @@ var LoadGameScene = Scene.extend({
 		Strings.loadTable("save");
 		this.menu = new Menu(32, 48, 256, 160);
 		this.menu.allowCancel = true;
+		this.menu.clipContents = false;
 		this.menu.pointer = new BoxMenuPointer();
 		this.menu.pointer.padding = [2, 2, 2, 2];
 		this.menu.pointer.border = false;

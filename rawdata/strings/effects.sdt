@@ -4,5 +4,5 @@
 		error: "vhit02.mp3"
 	},
 	
-	compilePath: "effects.sdt"
+	compilePath: "strings/effects.sdt"
 }

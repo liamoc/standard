@@ -4,6 +4,7 @@ var MessageBox = Window.extend({
 	currentLine: 0,
 	currentLetter: 0,
 	finishedTyping: false,
+	finished: false,
 	align: ALIGN_LEFT,
 	
 	constructor: function(text)
@@ -11,19 +12,42 @@ var MessageBox = Window.extend({
 		this.base(16, 16, 288, Resources.fonts.standard.getHeight() * 4, false);
 		
 		this.text = text;
-		
+		this.align = ALIGN_LEFT;
+		this.finishedTyping = false;
+		this.finished = false;
+		this.currentLine = 0;
+		this.currentLetter = 0;
+		this.clipContents = true;
 		this.wrapped_lines = text.wrap(Resources.fonts.standard, 288, 4);
 	},
 	onAdd: function()
 	{
-		Standard.addTimer(this, this.tick, 2);
+		Standard.addTimer(this, this.tick, 1);
+		Standard.addInput(this);
 		this.base();
 	},
 	
 	onRemove: function()
 	{
 		Standard.removeTimer(this, this.tick);
+		Standard.removeInput(this);
 		this.base();
+	},
+	
+	acceptKey: function(key)
+	{
+		switch (key)
+		{
+			case Config.controls.accept:
+				if (this.heldAccept) break;
+				if (this.finishedTyping)
+				{
+					Sounds.play("accept");
+					this.finished = true;
+					this.close();
+				}
+				break;
+		}
 	},
 	
 	tick: function()
@@ -31,7 +55,8 @@ var MessageBox = Window.extend({
 		if (this.finishedTyping) return;
 		
 		this.currentLetter++;
-		if (this.currentLetter == this.wrapped_lines[this.currentLine].length)
+		
+		if (this.currentLetter >= this.wrapped_lines[this.currentLine].length)
 		{
 			this.currentLine++;
 			if (this.currentLine == this.wrapped_lines.length)

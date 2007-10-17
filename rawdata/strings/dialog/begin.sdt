@@ -2,8 +2,9 @@
 	data: {
 		name: "Debug Room",
 		test_msg: "This is an extended test message to test out the MessageBox class. It should wrap properly and look cool and stuff. It should be four lines long when fully displayed.",
-		test_msg_2: "Game has been saved {0} times.",
-		save_list_item: "File {0}"
+		test_msg2: "Your name is {0}.",
+		save_list_item: "File {0}",
+		choose: "Choose a slot to save your game."
 	},
 	
 	compilePath: "strings/dialog/begin.sdt"

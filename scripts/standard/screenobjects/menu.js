@@ -10,6 +10,9 @@ var Menu = Window.extend({
 	results: [],
 	onFinish: false,
 	finished: false,
+	autoClose: true,
+	clipContents: true,
+	
 	pointer: new BoxMenuPointer(),
 	
 	constructor: function(x, y, w, h, transparent)
@@ -124,6 +127,7 @@ var Menu = Window.extend({
 					this.result = this.results[this.selected];
 					this.finished = true;
 					if (this.onFinish) this.onFinish();
+					if (this.autoClose) this.close();
 				}
 				else
 				{
@@ -137,6 +141,7 @@ var Menu = Window.extend({
 					this.canceled = true;
 					this.finished = true;
 					if (this.onFinish) this.onFinish();
+					if (this.autoClose) this.close();
 				}
 				break;
 		}
