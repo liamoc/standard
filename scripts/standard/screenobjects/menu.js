@@ -115,9 +115,11 @@ var Menu = Window.extend({
 		switch (key)
 		{
 			case Config.controls.up:
+				if (this.finished) break;
 				this.selected = Math.max(0, this.selected - 1);
 				break;
 			case Config.controls.down:
+				if (this.finished) break;
 				this.selected = Math.min(this.selected + 1, this.items.length - 1);
 				break;
 			case Config.controls.accept:
