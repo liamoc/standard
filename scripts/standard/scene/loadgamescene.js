@@ -11,6 +11,7 @@ var LoadGameScene = Scene.extend({
 		this.loadingIndex = 0;
 		Strings.loadTable("save");
 		this.menu = new Menu(32, 48, 256, 160);
+		this.menu.windowTitle = Strings.get("load_choose", "save");
 		this.menu.allowCancel = true;
 		this.menu.clipContents = false;
 		this.menu.pointer = new BoxMenuPointer();
@@ -84,8 +85,7 @@ var LoadGameScene = Scene.extend({
 		if (this.loadingIndex == this.saveSlots)
 		{
 			Standard.removeTimer(this, this.load_next);
-		
-			
+	
 			Screen.attach(5, this.menu);
 			this.loadingWindow.close();
 		}

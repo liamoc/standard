@@ -196,7 +196,10 @@ var TextMenuItem = MenuItem.extend({
 	
 	renderAt: function(x, y, w, selected)
 	{
-
+		if (this.align == ALIGN_LEFT)
+		{
+			x = x + 2;	// offset so pointers dont overlap
+		}
 		if (this.align == ALIGN_CENTER)
 		{
 			x += w / 2;
