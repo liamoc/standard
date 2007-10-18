@@ -51,7 +51,13 @@ var EventQueue = Class.extend({
 			if (!this.next())
 			{
 				Standard.removeTimer(this, this.check);
-				Standard.attachInput("hero");
+				var reattach = function()
+				{
+					Standard.attachInput("hero");
+					Standard.removeTimer(null, reattach);
+				};
+				Standard.addTimer(null, reattach, 20);
+				
 			}
 		}
 	},
