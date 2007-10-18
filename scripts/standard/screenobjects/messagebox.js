@@ -6,7 +6,7 @@ var MessageBox = Window.extend({
 	finishedTyping: false,
 	finished: false,
 	align: ALIGN_LEFT,
-	
+	id: "MessageBox",
 	constructor: function(text)
 	{
 		this.base(16, 16, 288, Resources.fonts.standard.getHeight() * 4, false);

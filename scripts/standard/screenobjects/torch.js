@@ -1,9 +1,9 @@
 var Torch = ScreenObject.extend({
 	image: false,
 	attached: false,
-	flicker: true,
+	flicker: false,
 	scale: 1,
-	
+	id: "torch",
 	constructor: function(attachperson)
 	{
 		this.attached = attachperson;
@@ -16,16 +16,16 @@ var Torch = ScreenObject.extend({
 	onAdd: function()
 	{
 		this.base();
-		if (this.flicker) Standard.addTimer(this, this.tick, 1);
+		if (this.flicker) Standard.addTimer(this, this.update, 1);
 	},
 	
 	onRemove: function()
 	{
 		this.base();
-		if (this.flicker) Standard.removeTimer(this, this.tick);
+		if (this.flicker) Standard.removeTimer(this, this.update);
 	},
 	
-	tick: function()
+	update: function()
 	{
 		if (this.scaleMove == 1)
 		{

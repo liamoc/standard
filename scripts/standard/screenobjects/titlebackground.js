@@ -1,6 +1,6 @@
 var TitleBackground = ScreenObject.extend({
 	system: false,
-	
+	id: "TitleBackground",
 	onAdd: function()
 	{
 		this.base();
@@ -40,6 +40,7 @@ var TitleBackground = ScreenObject.extend({
 		Screen.detach(this.std);	
 		Screen.detach(this.gradient);	
 		Screen.detach(this.black);
+		Standard.removeTimer(this, this.tick);
 	},
 	tick: function()
 	{

@@ -12,7 +12,7 @@ var Window = ScreenObject.extend({
 	closePixelsPerFrame: 0,
 	clipContents: false,
 	windowTitle: false,
-	
+	id: "Window",
 	constructor: function(x, y, w, h, transparent)
 	{
 		this.x = x;

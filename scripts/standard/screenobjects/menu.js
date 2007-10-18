@@ -12,7 +12,7 @@ var Menu = Window.extend({
 	finished: false,
 	autoClose: true,
 	clipContents: true,
-	
+	id: "Menu",
 	pointer: new BoxMenuPointer(),
 	
 	constructor: function(x, y, w, h, transparent)

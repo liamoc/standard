@@ -1,7 +1,7 @@
 var BoxMenuPointer = MenuPointer.extend({
 	padding: [0, 0, 0, 0],
 	border: true,
-	
+	id: "BoxMenuPointer",
 	constructor: function(x, y, w, h)
 	{
 		this.base(x, y, w, h);

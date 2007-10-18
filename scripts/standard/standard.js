@@ -180,11 +180,7 @@ var Standard = Class.extend({
 	
 	removeTimer: function(object, func)
 	{
-		var toRemove = this.timers.sliceWhere(function (x) { return x.object == object && x.func == func; });
-		for (var i = 0; i < toRemove.length; i++)
-		{
-			this.timers.remove(toRemove[i]);
-		}
+		return this.timers.removeIf(function (x) { return x.object == object && x.func == func; });
 	},
 	
 	inputs: [],

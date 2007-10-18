@@ -4,7 +4,7 @@
 		if (!State.displayedMessage)
 		{
 			var eq = new EventQueue();
-			eq.add(Event.torchOn);
+			//eq.add(Event.torchOn);
 			eq.add(Event.messageBox, [Strings.get("test_msg")]);
 			eq.add(Event.messageBox, [Strings.get("test_msg2").format(Party.characters[0].name)]);
 			eq.start();
@@ -41,7 +41,7 @@
 		{
 			var eq = new EventQueue();
 			
-			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level", "Move Character"]]);
+			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level", "Move Character", (State.torch ? "Torch Off" : "Torch On")]]);
 			eq.add(function()
 			{
 				switch (State.lastChoice)
@@ -57,6 +57,10 @@
 						eq.add(Event.messageBox, ["You're now moving!", true]);
 						eq.add(Event.wait, [60]);
 						eq.add(Event.closeMessageBox);
+						break;
+					case 4:
+						if (State.torch) eq.add(Event.torchOff);
+						else eq.add(Event.torchOn);
 						break;
 				}
 			});

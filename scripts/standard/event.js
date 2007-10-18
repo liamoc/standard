@@ -26,16 +26,16 @@ var EventQueue = Class.extend({
 	queue: [],
 	position: 0,
 	lock: false,
-	
+	id: "EventQueue",
 	constructor: function()
 	{
 		this.queue = [];
 		this.lock = false;
 	},
 	
-	add: function(f, p, auto)
+	add: function(f, p)
 	{
-		this.queue.push({func: f, args: p, auto: auto});
+		this.queue.push({func: f, args: p});
 	},
 	
 	start: function()
@@ -48,7 +48,8 @@ var EventQueue = Class.extend({
 	{
 		if (!this.lock || this.lock())
 		{
-			if (!this.next())
+			var item = this.next();
+			if (!item)
 			{
 				Standard.removeTimer(this, this.check);
 				var reattach = function()
@@ -56,8 +57,7 @@ var EventQueue = Class.extend({
 					Standard.attachInput("hero");
 					Standard.removeTimer(null, reattach);
 				};
-				Standard.addTimer(null, reattach, 20);
-				
+				Standard.addTimer(null, reattach, 20);				
 			}
 		}
 	},
@@ -68,11 +68,8 @@ var EventQueue = Class.extend({
 		{
 			return false;
 		}
-		this.lock = this.queue[this.position].func.apply(this.queue[this.position].func, this.queue[this.position].args);
-		
-		if (this.queue[this.position].auto)
-			this.lock = false;
-		
+		this.lock = this.queue[this.position].func.apply(null, this.queue[this.position].args);
+			
 		this.position++;		
 		
 		return true;
