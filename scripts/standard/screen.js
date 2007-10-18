@@ -16,7 +16,17 @@ var Screen = Class.extend({
 		this.layers[layer].push(object);
 		object.onAdd();
 	},
-	
+	detachAll: function()
+	{
+		for (var i = 0; i < this.layers.length; i++)
+		{
+			if (this.layers[i])
+			{
+				this.layers[i].forEach(function(o) { o.onRemove(); });
+			}
+		}
+		this.layers = new Array(9);
+	},
 	detach: function(object)
 	{
 		object.onRemove();

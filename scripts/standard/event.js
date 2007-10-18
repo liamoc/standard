@@ -4,6 +4,21 @@ var Event = Class.extend({
 	addFunction: function(name, f)
 	{
 		this[name] = f;
+	},
+	
+	loadHooks: [],
+	
+	addLoadingHook: function(f)
+	{
+		this.loadHooks.push(f);
+	},
+	
+	runLoadingHooks: function()
+	{
+		for (var i = 0; i < this.loadHooks.length; i++)
+		{
+			this.loadHooks[i]();
+		}
 	}
 });
 
@@ -105,4 +120,30 @@ Event.addFunction("choice", function(items)
 	{
 		return choice.finished;
 	}
+});
+
+Event.addFunction("torchOn", function(attach)
+{
+	if (!attach) attach = Standard.inputPerson;
+	var torch = new Torch(attach);
+	Screen.attach(4, torch);
+	Event.torch = torch;
+	State.torch = true;
+});
+
+Event.addFunction("torchOff", function()
+{
+	Screen.detach(Event.torch);
+	State.torch = false;
+});
+
+Event.addLoadingHook(function()
+{
+	if (State.torch) Event.torchOn();
+});
+
+Event.addFunction("returnToTitle", function()
+{
+	Screen.detachAll();
+	Standard.changeScene(new TitleScene());
 });

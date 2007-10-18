@@ -95,6 +95,7 @@ var SaveManager = Class.extend({
 				SetPersonDirection(gameData.personData[i].p, gameData.personData[i].d);
 			}
 		}
+		Event.runLoadingHooks();
 	},
 	
 	loadDefaultGame: function()

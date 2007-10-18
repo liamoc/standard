@@ -4,6 +4,7 @@
 		if (!State.displayedMessage)
 		{
 			var eq = new EventQueue();
+			eq.add(Event.torchOn);
 			eq.add(Event.messageBox, [Strings.get("test_msg")]);
 			eq.add(Event.messageBox, [Strings.get("test_msg2").format(Party.characters[0].name)]);
 			eq.start();
@@ -40,13 +41,16 @@
 		{
 			var eq = new EventQueue();
 			
-			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu"]]);
+			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level"]]);
 			eq.add(function()
 			{
 				switch (State.lastChoice)
 				{
 					case 1:
-						Standard.changeScene(new TitleScene());
+						Event.returnToTitle();
+						break;
+					case 2:
+						Party.characters[0].stats.level = Random(1, 99);
 						break;
 				}
 			});
