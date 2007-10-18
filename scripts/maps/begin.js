@@ -41,7 +41,7 @@
 		{
 			var eq = new EventQueue();
 			
-			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level"]]);
+			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level", "Move Character"]]);
 			eq.add(function()
 			{
 				switch (State.lastChoice)
@@ -51,6 +51,12 @@
 						break;
 					case 2:
 						Party.characters[0].stats.level = Random(1, 99);
+						break;
+					case 3:
+						eq.add(Event.movePerson, ["hero", "ne2s2w2nfe", true]);
+						eq.add(Event.messageBox, ["You're now moving!", true]);
+						eq.add(Event.wait, [60]);
+						eq.add(Event.closeMessageBox);
 						break;
 				}
 			});

@@ -112,6 +112,7 @@ var Standard = Class.extend({
 	detachInput: function()
 	{
 		DetachInput();
+		this.inputPerson = false;
 	},
 	
 	currentScene: false,
