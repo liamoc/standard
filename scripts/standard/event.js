@@ -124,6 +124,7 @@ Event.addFunction("choice", function(items)
 
 Event.addFunction("torchOn", function(attach)
 {
+	if (Event.torch) Screen.detach(Event.torch);
 	if (!attach) attach = Standard.inputPerson;
 	var torch = new Torch(attach);
 	Screen.attach(4, torch);
@@ -135,6 +136,7 @@ Event.addFunction("torchOff", function()
 {
 	Screen.detach(Event.torch);
 	State.torch = false;
+	Event.torch = false;
 });
 
 Event.addLoadingHook(function()
