@@ -9,5 +9,5 @@
 		choose2: "Choose an option."
 	},
 	
-	compilePath: "strings/dialog/begin.sdt"
+	compilePath: "strings/maps/begin.sdt"
 }

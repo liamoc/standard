@@ -1,7 +1,0 @@
-{
-	data: {
-		test: "Test!"
-	},
-	
-	compilePath: "strings/dialog/begin.copy.sdt"
-}
