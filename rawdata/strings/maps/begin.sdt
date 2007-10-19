@@ -1,6 +1,7 @@
 {
 	data: {
 		name: "Debug Room",
+		music: "forest3.s3m",
 		test_msg: "This is an extended test message to test out the MessageBox class. It should wrap properly and look cool and stuff. It should be four lines long when fully displayed.",
 		test_msg2: "Your name is {0}.",
 		save_list_item: "File {0}",

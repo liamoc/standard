@@ -1,6 +1,8 @@
 {
 	data: {
 		background: SerializedResources.image.get("backgrounds/clearing.png"),
+		music: "battleofsteel.xm",
+		
 		monsters: [
 			{
 				x: 40,

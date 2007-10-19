@@ -67,12 +67,17 @@ var Map = Class.extend({
 	
 	change: function(map)
 	{
+		Sounds.stopMusic();
 		var mapname = Path.baseName(map);
-		Strings.unloadTable("dialog");
-		if (GetFileList("data/strings/dialog/").indexOf(mapname + ".sdt") >= 0)
+		Strings.unloadTable("map");
+		if (GetFileList("data/strings/maps/").indexOf(mapname + ".sdt") >= 0)
 		{
-			Strings.loadTable(mapname, "dialog");
+			Strings.loadTable(mapname, "map");
 		}
 		ChangeMap(map);
+		if (Strings.get("music"))
+		{
+			Sounds.playMusic(Strings.get("music"));
+		}
 	}
 });

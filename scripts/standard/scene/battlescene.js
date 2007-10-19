@@ -17,6 +17,9 @@ var BattleScene = Scene.extend({
 		this.background = new Image(battle_info.background, 0, 0);
 		this.enemyList = new EnemyList();
 		this.partyList = new PartyList();
+		
+		Sounds.playMusic(battle_info.music);
+		
 	},
 	
 	onEnter: function()

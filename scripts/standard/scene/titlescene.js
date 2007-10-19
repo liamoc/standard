@@ -35,6 +35,7 @@ var TitleScene = Scene.extend({
 		}
 		if (GetCurrentMap() != "entry.rmp") Map.change("entry.rmp");
 		this.base();
+		Sounds.playMusic(Settings.get("titleMusic"));
 	},
 	onLeave: function()
 	{
@@ -68,7 +69,8 @@ var TitleScene = Scene.extend({
 			
 			
 		};
-		Screen.attach(9, this.exitTrans);		
+		Screen.attach(9, this.exitTrans);
+		Sounds.fadeMusicOut();
 	},
 	
 	menuSetup: function()
@@ -82,11 +84,13 @@ var TitleScene = Scene.extend({
 	{
 		this.exitTrans.onFinish = function() { Standard.changeScene(new LoadGameScene()); };
 		Screen.attach(9, this.exitTrans);
+		Sounds.fadeMusicOut();
 	},
 	
 	menuExit: function()
 	{
 		this.exitTrans.onFinish = Exit;
 		Screen.attach(9, this.exitTrans);
+		Sounds.fadeMusicOut();
 	}
 });

@@ -3,7 +3,8 @@
 		startMap: "begin.rmp",
 		name: "Standard Engine Test",
 		version: "0.0.4",
-		saveSlots: 20
+		saveSlots: 20,
+		titleMusic: "hyo-vile.it"
 	},
 	
 	compilePath: "settings.sds"

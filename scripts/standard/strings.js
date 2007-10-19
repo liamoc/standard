@@ -7,10 +7,10 @@ var Strings = Class.extend({
 	{
 		if (!bank) bank = table;
 		var serializer;
-		if (bank != "dialog")
+		if (bank != "map")
 			serializer = new Serializer("../data/strings/" + table + ".sdt");
 		else
-			serializer = new Serializer("../data/strings/dialog/" + table + ".sdt");
+			serializer = new Serializer("../data/strings/maps/" + table + ".sdt");
 		this.tables[bank] = serializer.read();
 		serializer.close();
 	},
@@ -22,7 +22,7 @@ var Strings = Class.extend({
 	
 	get: function(id, bank)
 	{
-		if (!bank) bank = "dialog";
+		if (!bank) bank = "map";
 		return this.tables[bank][id];
 	}
 });
