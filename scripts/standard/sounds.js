@@ -12,6 +12,8 @@ var Sounds = Class.extend({
 	
 	play: function(effectID)
 	{
-		Cache.getSound(this.mapping[effectID]).play(false);
+		var snd = Cache.getSound(this.mapping[effectID]);
+		snd.stop();
+		snd.play(false);
 	}
 });

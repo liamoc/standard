@@ -1,7 +1,12 @@
 {
 	data: {
 		image: SerializedResources.image.get("monsters/zombie_demon.png"),
-		name: "Zombie Demon"
+		name: "Zombie Demon",
+		stats: {
+			level: 20,
+			hp: 500,
+			mp: 50
+		}
 	},
 	
 	compilePath: "monsters/zombie_demon.sdm",

@@ -6,21 +6,36 @@ var Event = Class.extend({
 		this[name] = f;
 	},
 	
-	loadHooks: [],
+	mapEntryHooks: [],
+	mapExitHooks: [],
 	
-	addLoadingHook: function(f)
+	addMapEntryHook: function(f)
 	{
-		this.loadHooks.push(f);
+		this.mapEntryHooks.push(f);
 	},
 	
-	runLoadingHooks: function()
+	addMapExitHook: function(f)
 	{
-		for (var i = 0; i < this.loadHooks.length; i++)
+		this.mapExitHooks.push(f);
+	},
+	
+	runMapEntryHooks: function()
+	{
+		for (var i = 0; i < this.mapEntryHooks.length; i++)
 		{
-			this.loadHooks[i]();
+			this.mapEntryHooks[i]();
+		}
+	},
+	
+	runMapExitHooks: function()
+	{
+		for (var i = 0; i < this.mapExitHooks.length; i++)
+		{
+			this.mapExitHooks[i]();
 		}
 	}
 });
+
 
 var EventQueue = Class.extend({
 	queue: [],
@@ -158,9 +173,13 @@ Event.addFunction("torchOff", function()
 	Event.torch = false;
 });
 
-Event.addLoadingHook(function()
+Event.addMapEntryHook(function()
 {
 	if (State.torch) Event.torchOn();
+});
+Event.addMapExitHook(function()
+{
+	if (State.torch) Screen.detach(Event.torch);
 });
 
 Event.addFunction("returnToTitle", function()
@@ -252,5 +271,25 @@ Event.addFunction("wait", function(frames)
 	return function()
 	{
 		return ret_val;
+	}
+});
+
+Event.addFunction("battle", function(id)
+{
+	Standard.detachInput();
+	Event.currentBattle = new BattleScene(id);
+	var transition = new BattleTransition();
+	transition.onFinish = function()
+	{
+		Standard.changeScene(Event.currentBattle);
+	}
+	Screen.attach(9, transition);
+	return function()
+	{
+		if (Event.currentBattle.finished)
+		{
+			Standard.attachInput("hero");
+			return true;
+		}
 	}
 });

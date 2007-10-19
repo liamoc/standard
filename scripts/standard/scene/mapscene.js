@@ -6,5 +6,11 @@ var MapScene = Scene.extend({
 		trans.generateImage();
 		trans.image.blendmode = ADD;
 		Screen.attach(9, trans);
+		Event.runMapEntryHooks();
+	},
+	
+	onLeave: function()
+	{
+		Event.runMapExitHooks();
 	}
 });

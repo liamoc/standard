@@ -24,5 +24,16 @@ var SerializedResources = Class.extend({
 				save: function(s) { s.write(false); s.write(path); }
 			};
 		}
+	},
+	
+	monster:
+	{
+		get: function(path)
+		{
+			return {
+				className: "Monster",
+				save: function(s) { s.write(path); }
+			};
+		}
 	}
 });

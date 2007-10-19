@@ -41,7 +41,7 @@
 		{
 			var eq = new EventQueue();
 			
-			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level", "Move Character", (State.torch ? "Torch Off" : "Torch On")]]);
+			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level", "Move Character", (State.torch ? "Torch Off" : "Torch On"), "Battle"]]);
 			eq.add(function()
 			{
 				switch (State.lastChoice)
@@ -61,6 +61,9 @@
 					case 4:
 						if (State.torch) eq.add(Event.torchOff);
 						else eq.add(Event.torchOn);
+						break;
+					case 5:
+						eq.add(Event.battle, ["test"]);
 						break;
 				}
 			});

@@ -39,6 +39,7 @@ RequireScript("standard/path.js");
 RequireScript("standard/state.js");
 RequireScript("standard/sounds.js");
 RequireScript("standard/event.js");
+RequireScript("standard/monster.js");
 
 
 // Include all the Screen objects
@@ -59,12 +60,16 @@ RequireScript("standard/screenobjects/messagebox.js");
 RequireScript("standard/screenobjects/loadingwindow.js");
 RequireScript("standard/screenobjects/infobox.js");
 RequireScript("standard/screenobjects/torch.js");
+RequireScript("standard/screenobjects/battletransition.js");
+RequireScript("standard/screenobjects/enemylist.js");
+RequireScript("standard/screenobjects/partylist.js");
 
 // Include all the Scene objects
 RequireScript("standard/scene/scene.js");
 RequireScript("standard/scene/titlescene.js");
 RequireScript("standard/scene/mapscene.js");
 RequireScript("standard/scene/loadgamescene.js");
+RequireScript("standard/scene/battlescene.js");
 
 
 // The main engine object.

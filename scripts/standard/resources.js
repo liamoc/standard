@@ -18,6 +18,7 @@ var Resources = Class.extend({
 		white20: CreateColor(255, 255, 255, 40),
 		black: CreateColor(0, 0, 0),
 		black20: CreateColor(0, 0, 0, 40),
+		black100: CreateColor(0, 0, 0, 255),
 		wswhite: CreateColor(242, 243, 249),
 		wswhite0: CreateColor(242, 243, 249, 0)
 	}

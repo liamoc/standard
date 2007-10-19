@@ -1,0 +1,14 @@
+{
+	data: {
+		background: SerializedResources.image.get("backgrounds/bridge.png"),
+		monsters: [
+			{
+				x: 40,
+				y: 40,
+				monster: SerializedResources.monster.get("zombie_demon.sdm")
+			}			
+		]
+	},
+	
+	compilePath: "battles/test.sdb",
+}
