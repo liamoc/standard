@@ -41,7 +41,7 @@
 		{
 			var eq = new EventQueue();
 			
-			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level", "Move Character", (State.torch ? "Torch Off" : "Torch On"), "Battle"]]);
+			eq.add(Event.messageBoxChoice, [Strings.get("choose2"), ["Cancel", "Back to Menu", "Change Level", "Move Character", (State.torch ? "Torch Off" : "Torch On"), "Randomise HP", "Battle"]]);
 			eq.add(function()
 			{
 				switch (State.lastChoice)
@@ -63,6 +63,12 @@
 						else eq.add(Event.torchOn);
 						break;
 					case 5:
+						for (var i = 0; i < Party.characters.length; i++)
+						{
+							Party.characters[i].stats.hp = Random(1, Party.characters[i].stats.maxhp);
+						}
+						break;
+					case 6:
 						eq.add(Event.battle, ["test"]);
 						break;
 				}

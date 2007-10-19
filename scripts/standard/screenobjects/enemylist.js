@@ -3,6 +3,8 @@ var EnemyList = Window.extend({
 	{
 		this.base(4, 164, 70, 72, false);
 		this.clipContents = true;
+		//this.font = Resources.fonts.corbel;
+		this.padding = 2;
 	},
 	
 	renderContent: function()

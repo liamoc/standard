@@ -57,3 +57,7 @@ String.prototype.numericPad = function(len)
 	while (s.length < len) s = "0" + s;
 	return s;
 }
+
+String.prototype.repeat = function(l){
+	return new Array(l+1).join(this);
+};

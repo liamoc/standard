@@ -1,12 +1,27 @@
 {
 	data: {
-		background: SerializedResources.image.get("backgrounds/bridge.png"),
+		background: SerializedResources.image.get("backgrounds/clearing.png"),
 		monsters: [
 			{
 				x: 40,
 				y: 40,
 				monster: SerializedResources.monster.get("zombie_demon.sdm")
-			}			
+			},
+			{
+				x: 40,
+				y: 60,
+				monster: SerializedResources.monster.get("zombie_demon.sdm")
+			},
+			{
+				x: 40,
+				y: 60,
+				monster: SerializedResources.monster.get("zombie_demon.sdm")
+			},
+			{
+				x: 40,
+				y: 60,
+				monster: SerializedResources.monster.get("zombie_demon.sdm")
+			}		
 		]
 	},
 	

@@ -7,6 +7,7 @@ var Window = ScreenObject.extend({
 	y: 0,
 	w: 0,
 	h: 0,
+	padding: 0,
 	font: Resources.fonts.standard,
 	transparent: false,
 	closePixelsPerFrame: 0,
@@ -29,9 +30,17 @@ var Window = ScreenObject.extend({
 			Resources.fonts.all_caps.drawText(this.x, this.y - Resources.fonts.all_caps.getHeight() - 1, this.windowTitle);
 		}
 		if (!this.transparent) Resources.windows.standard.drawWindow(this.x, this.y, this.w, this.h);
+		this.x += this.padding;
+		this.y += this.padding;
+		this.w -= this.padding * 2;
+		this.h -= this.padding * 2;
 		if (this.clipContents) SetClippingRectangle(this.x, this.y, this.w, this.h);
 		this.renderContent();
 		if (this.clipContents) SetClippingRectangle(0, 0, 320, 240);
+		this.x -= this.padding;
+		this.y -= this.padding;
+		this.w += this.padding * 2;
+		this.h += this.padding * 2;
 	},
 	renderContent: function()
 	{
