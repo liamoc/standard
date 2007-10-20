@@ -190,7 +190,6 @@ Event.addFunction("returnToTitle", function()
 
 Event.addFunction("movePerson", function(person, queue, nowait)
 {
-	var log = OpenLog( "move.txt");
 	var queue = queue.toLowerCase();
 	var last_cmd = false;
 	var simple_map = {
@@ -216,7 +215,6 @@ Event.addFunction("movePerson", function(person, queue, nowait)
 	
 	for (var i = 0; i < queue.length; i++)
 	{
-		log.write("Position: " + i);
 		var cmd = queue.charAt(i);
 		if (cmd.match(/^\d+$/))
 		{
@@ -225,7 +223,6 @@ Event.addFunction("movePerson", function(person, queue, nowait)
 				cmd += queue.charAt(i+1);
 				i++;
 			}
-			log.write("Repeating " + parseInt(cmd));
 			if (!last_cmd) throw "Repeat at start of movement sequence is invalid.";
 			for (var j = 0; j < parseInt(cmd) - 1; j++)
 			{
