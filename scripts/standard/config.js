@@ -8,5 +8,10 @@ var Config = Class.extend({
 		right: KEY_RIGHT,
 		accept: KEY_X,
 		cancel: KEY_Z
+	},
+	
+	volume: {
+		music: 0,
+		sound: 10
 	}
 });

@@ -12,23 +12,27 @@ var BattleScene = Scene.extend({
 			this.monsters.push(battle_info.monsters[i].monster);
 			battle_info.monsters[i].monster.x = battle_info.monsters[i].x;
 			battle_info.monsters[i].monster.y = battle_info.monsters[i].y;
+			battle_info.monsters[i].monster.createGraphic();
 		}
+		this.music = battle_info.music;
 		this.cb = new ColorBlock(Resources.colors.black);
 		this.background = new Image(battle_info.background, 0, 0);
 		this.enemyList = new EnemyList();
 		this.partyList = new PartyList();
-		
-		Sounds.playMusic(battle_info.music);
-		
 	},
 	
 	onEnter: function()
 	{
+		Sounds.playMusic(this.music);
 		Screen.attach(0, this.cb);
-		Screen.attach(5, this.background);
+		Screen.attach(2, this.background);
 		Screen.attach(9, new FadeInTransition());
-		Screen.attach(5, this.enemyList);
-		Screen.attach(5, this.partyList);
+		Screen.attach(7, this.enemyList);
+		Screen.attach(7, this.partyList);
+		for (var i = 0; i < this.monsters.length; i++)
+		{
+			Screen.attach(5, this.monsters[i].graphic);
+		}
 	},
 	
 	onRemove: function()

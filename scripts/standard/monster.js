@@ -6,6 +6,13 @@ var Monster = Class.extend({
 		this.image = data.image;
 		this.name = data.name;
 		this.stats = data.stats;
+		this.x = 0;
+		this.y = 0;
+	},
+	
+	createGraphic: function()
+	{
+		this.graphic = new MonsterGraphic(this, this.x, this.y);
 	}
 	
 });

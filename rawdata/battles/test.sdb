@@ -5,25 +5,10 @@
 		
 		monsters: [
 			{
-				x: 40,
-				y: 40,
+				x: 20,
+				y: 30,
 				monster: SerializedResources.monster.get("zombie_demon.sdm")
-			},
-			{
-				x: 40,
-				y: 60,
-				monster: SerializedResources.monster.get("zombie_demon.sdm")
-			},
-			{
-				x: 40,
-				y: 60,
-				monster: SerializedResources.monster.get("zombie_demon.sdm")
-			},
-			{
-				x: 40,
-				y: 60,
-				monster: SerializedResources.monster.get("zombie_demon.sdm")
-			}		
+			}
 		]
 	},
 	

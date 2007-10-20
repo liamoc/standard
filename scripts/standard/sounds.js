@@ -15,6 +15,7 @@ var Sounds = Class.extend({
 	{
 		var snd = Cache.getSound(this.mapping[effectID]);
 		snd.stop();
+		snd.setVolume(255 / 10 * Config.volume.sound);
 		snd.play(false);
 	},
 	
@@ -22,6 +23,7 @@ var Sounds = Class.extend({
 	{
 		if (this.sound) this.sound.stop();
 		this.sound = LoadSound(file);
+		this.sound.setVolume(255 / 10 * Config.volume.music);
 		this.sound.play(true);
 	},
 	stopMusic: function()
@@ -34,7 +36,7 @@ var Sounds = Class.extend({
 		var sound = this.sound;
 		function fadeStep()
 		{
-			var volume = Math.max(0, sound.getVolume() - 5);
+			var volume = Math.max(0, sound.getVolume() - ((255 / 10) * Config.volume.music) / 50);
 			sound.setVolume(volume);
 			if (volume == 0)
 			{

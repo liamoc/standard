@@ -277,16 +277,16 @@ Event.addFunction("wait", function(frames)
 Event.addFunction("battle", function(id)
 {
 	Standard.detachInput();
-	Event.currentBattle = new BattleScene(id);
 	var transition = new BattleTransition();
 	transition.onFinish = function()
 	{
+		Event.currentBattle = new BattleScene(id);
 		Standard.changeScene(Event.currentBattle);
 	}
 	Screen.attach(9, transition);
 	return function()
 	{
-		if (Event.currentBattle.finished)
+		if (Event.currentBattle && Event.currentBattle.finished)
 		{
 			Standard.attachInput("hero");
 			return true;

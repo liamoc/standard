@@ -54,6 +54,7 @@ var SaveManager = Class.extend({
 				state: State,
 				
 				controls: Config.controls,
+				volume: Config.volume,
 				
 				map: GetCurrentMap(),
 				personData: personData
@@ -74,6 +75,7 @@ var SaveManager = Class.extend({
 		Party.items = gameData.party.items;
 		State = gameData.state;
 		if (gameData.controls) Config.controls = gameData.controls;
+		if (gameData.volume) Config.volume = gameData.volume;
 		serializer.close();
 		
 		if (!basic)

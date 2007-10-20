@@ -63,6 +63,7 @@ RequireScript("standard/screenobjects/torch.js");
 RequireScript("standard/screenobjects/battletransition.js");
 RequireScript("standard/screenobjects/enemylist.js");
 RequireScript("standard/screenobjects/partylist.js");
+RequireScript("standard/screenobjects/monstergraphic.js");
 
 // Include all the Scene objects
 RequireScript("standard/scene/scene.js");

@@ -1,7 +1,7 @@
 {
 	data: {
 		image: SerializedResources.image.get("monsters/zombie_demon.png"),
-		name: "Zombie Demon",
+		name: "Lich",
 		stats: {
 			level: 20,
 			hp: 500,

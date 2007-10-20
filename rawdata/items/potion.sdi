@@ -1,0 +1,11 @@
+{
+	data: {
+		name: "Potion",
+		canUse: true,
+		canEquip: false,
+		icon: SerializedResources.image.get("icons/potion.png"),
+		description: "Restores 150 HP."
+	},
+	
+	compilePath: "items/potion.sdi"
+}
