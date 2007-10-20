@@ -19,6 +19,13 @@ var BattleScene = Scene.extend({
 		this.background = new Image(battle_info.background, 0, 0);
 		this.enemyList = new EnemyList();
 		this.partyList = new PartyList();
+		this.charGraphics = [];
+		for (var i = 0; i < Party.characters.length; i++)
+		{
+			this.charGraphics.push(new CharacterGraphic(Party.characters[i], 260 + i * 8, 72 + i * 20));
+			this.charGraphics[this.charGraphics.length-1].facing = "west";
+			this.charGraphics[this.charGraphics.length-1].setDirection("west_idle");
+		}
 	},
 	
 	onEnter: function()
@@ -33,13 +40,29 @@ var BattleScene = Scene.extend({
 		{
 			Screen.attach(5, this.monsters[i].graphic);
 		}
+		for (var i = 0; i < this.charGraphics.length; i++)
+		{
+			Screen.attach(5, this.charGraphics[i]);
+		}
+		
+		Standard.addTimer(this, this.tick, 1);
 	},
 	
-	onRemove: function()
+	onLeave: function()
 	{
+		Standard.removeTimer(this, this.tick);
 		Screen.detach(this.cb);
 		Screen.detach(this.background);
 		Screen.detach(this.enemyList);
 		Screen.detach(this.partyList);
+	},
+	tick: function()
+	{
+		for (var i = 0; i < Party.characters.length; i++)
+		{
+			var atb_modifier = Party.characters[i].getAtbModifier();
+			Party.characters[i].atb = Math.min(65536, Party.characters[i].atb + (atb_modifier * (Party.characters[i].stats.speed + 20)) / 16);
+		}
 	}
+	
 });

@@ -64,6 +64,7 @@ RequireScript("standard/screenobjects/battletransition.js");
 RequireScript("standard/screenobjects/enemylist.js");
 RequireScript("standard/screenobjects/partylist.js");
 RequireScript("standard/screenobjects/monstergraphic.js");
+RequireScript("standard/screenobjects/charactergraphic.js");
 
 // Include all the Scene objects
 RequireScript("standard/scene/scene.js");

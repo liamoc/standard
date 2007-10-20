@@ -43,7 +43,11 @@ var PartyList = Window.extend({
 			this.font.setColorMask(Resources.colors.white);
 			this.font.drawText(mhp_r_x, y - 4, mhp_val);
 			
-			
+			var atbbmw = 60;
+			var atbbw = Party.characters[i].atb / 65536 * atbbmw;
+			var atb_x = 240;
+			Rectangle(atb_x, y + 4, atbbw, 4, Resources.colors.green);
+			Rectangle(atb_x + atbbw, y + 4, atbbmw - atbbw, 4, Resources.colors.darkgreen);			
 			
 		}
 	}
