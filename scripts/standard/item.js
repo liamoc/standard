@@ -11,8 +11,9 @@ var Item = Class.extend({
 		this.canEquip = data.canEquip;
 		this.icon = data.icon;
 		this.description = data.description;
+		serializer.close();
 	},
-	
+	className: "Item",
 	save: function(s)
 	{
 		s.write(this.path);

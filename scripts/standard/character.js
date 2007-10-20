@@ -37,7 +37,7 @@ var Character = Class.extend({
 		}
 		return base_value;
 	},
-	
+
 	save: function(s)
 	{
 		s.write(true);

@@ -18,6 +18,8 @@ var BattleScene = Scene.extend({
 		this.cb = new ColorBlock(Resources.colors.black);
 		this.background = new Image(battle_info.background, 0, 0);
 		this.enemyList = new EnemyList();
+		this.commandAvailable = [];
+		this.currentCommandMenu = 0;
 		this.partyList = new PartyList();
 		this.charGraphics = [];
 		for (var i = 0; i < Party.characters.length; i++)
@@ -34,8 +36,8 @@ var BattleScene = Scene.extend({
 		Screen.attach(0, this.cb);
 		Screen.attach(2, this.background);
 		Screen.attach(9, new FadeInTransition());
-		Screen.attach(7, this.enemyList);
-		Screen.attach(7, this.partyList);
+		Screen.attach(6, this.enemyList);
+		Screen.attach(6, this.partyList);
 		for (var i = 0; i < this.monsters.length; i++)
 		{
 			Screen.attach(5, this.monsters[i].graphic);
@@ -62,7 +64,30 @@ var BattleScene = Scene.extend({
 		{
 			var atb_modifier = Party.characters[i].getAtbModifier();
 			Party.characters[i].atb = Math.min(65536, Party.characters[i].atb + (atb_modifier * (Party.characters[i].stats.speed + 20)) / 16);
+			if (Party.characters[i].atb == 65536 && !this.commandAvailable.contains(Party.characters[i]))
+			{
+				this.requestCommand(Party.characters[i]);
+			}
 		}
+	},
+	requestCommand: function(character)
+	{
+		this.commandAvailable.push(character);
+		if (this.commandAvailable.length == 1)
+		{
+			// We just added this, so show the next command window automatically
+			this.showNextCommandWindow();
+		}
+	},
+	showNextCommandWindow: function()
+	{
+		var c = this.commandAvailable[this.currentCommandMenu];
+		var menu = new Menu(24, 154, 70, Resources.fonts.standard.getHeight() * 4, false);
+		menu.addItem(new TextMenuItem("Attack", ALIGN_LEFT), false);
+		menu.addItem(new TextMenuItem("Attack", ALIGN_LEFT), false);
+		menu.addItem(new TextMenuItem("Attack", ALIGN_LEFT), false);
+		menu.addItem(new TextMenuItem("Attack", ALIGN_LEFT), false);
+		Screen.attach(7, menu);
+		this.partyList.selectCharacter(c);
 	}
-	
 });

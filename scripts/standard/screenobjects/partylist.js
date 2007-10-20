@@ -3,14 +3,25 @@ var PartyList = Window.extend({
 	{
 		this.base(80, 164, 236, 72, false);
 		this.padding = 2;
+		this.selectedCharacter = false;
 		this.clipContents = true;
 	},
-	
+	selectCharacter: function(c)
+	{
+		this.selectedCharacter = c;
+	},
 	renderContent: function()
 	{
 		for (var i = 0; i < Party.characters.length; i++)
 		{
-			var y = this.y + i * 72 / 4;
+			var y = this.y + i * 68 / 4;
+			
+			if (Party.characters[i] == this.selectedCharacter)
+			{
+				Rectangle(this.x, y, this.w, 68 / 4, CreateColor(25, 50, 127, 120));
+				OutlinedRectangle(this.x, y, this.w, 68 / 4, CreateColor(242, 243, 249, 180));
+			}
+			y += 2;
 			this.font.drawText(this.x, y, Party.characters[i].name);
 			
 			

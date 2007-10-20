@@ -23,6 +23,7 @@ var Strings = Class.extend({
 	get: function(id, bank)
 	{
 		if (!bank) bank = "map";
+		if (!this.tables[bank]) return false;
 		return this.tables[bank][id];
 	}
 });
