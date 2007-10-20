@@ -40,6 +40,7 @@ RequireScript("standard/state.js");
 RequireScript("standard/sounds.js");
 RequireScript("standard/event.js");
 RequireScript("standard/monster.js");
+RequireScript("standard/item.js");
 
 
 // Include all the Screen objects
