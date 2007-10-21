@@ -1,0 +1,42 @@
+{
+	data: [
+		{
+			id: "attack",
+			name: "Attack",
+			type: "final",
+			effect: "attack"
+		},
+		
+		{
+			id: "item",
+			name: "Item",
+			type: "menu",
+			filter: {
+				source: "items",
+				enable: {
+					canUseBattle: true
+				}
+			}
+		},
+		
+		{
+			id: "wmagic",
+			name: "White Magic",
+			type: "menu",
+			filter: {
+				source: "abilities",
+				require: {
+					type: "wmagic",
+				},
+				enable: {
+					mp: function(value, character)
+					{
+						return value < character.stats.mp;
+					}
+				}
+			}
+		}
+	],
+	
+	compilePath: "commands.sdx"
+}

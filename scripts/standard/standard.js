@@ -41,6 +41,7 @@ RequireScript("standard/sounds.js");
 RequireScript("standard/event.js");
 RequireScript("standard/monster.js");
 RequireScript("standard/item.js");
+RequireScript("standard/commands.js");
 
 
 // Include all the Screen objects
@@ -107,6 +108,8 @@ var Standard = Class.extend({
 		
 		Map.init();
 		Sounds.loadEffectMapping();
+		
+		Commands.load();
 		
 		MapEngine("entry.rmp", 60);
 	},

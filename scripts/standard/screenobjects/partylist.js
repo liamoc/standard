@@ -22,7 +22,7 @@ var PartyList = Window.extend({
 				OutlinedRectangle(this.x, y, this.w, 68 / 4, CreateColor(242, 243, 249, 180));
 			}
 			y += 2;
-			this.font.drawText(this.x, y, Party.characters[i].name);
+			this.font.drawText(this.x + 2, y, Party.characters[i].name);
 			
 			
 			var hp_val = Party.characters[i].stats.hp;

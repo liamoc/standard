@@ -13,6 +13,10 @@ var Item = Class.extend({
 		this.description = data.description;
 		serializer.close();
 	},
+	getMenuText: function()
+	{
+		return this.name;
+	},
 	className: "Item",
 	save: function(s)
 	{

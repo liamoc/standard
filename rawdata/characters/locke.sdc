@@ -9,7 +9,13 @@
 			level: 1,
 			speed: 40
 		},
-		spriteset_path: "locke.rss"
+		spriteset_path: "locke.rss",
+		commands: [
+			"attack",
+			"wmagic",
+			false,
+			"item"
+		]
 	},
 	
 	compilePath: "characters/locke.sdc"
