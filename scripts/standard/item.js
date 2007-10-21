@@ -17,6 +17,10 @@ var Item = Class.extend({
 	{
 		return this.name;
 	},
+	getMenuEndText: function()
+	{
+		return this.num;
+	},
 	className: "Item",
 	save: function(s)
 	{

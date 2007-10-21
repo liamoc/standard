@@ -186,6 +186,7 @@ var TextMenuItem = MenuItem.extend({
 	align: ALIGN_LEFT,
 	selectedColor: false,
 	font: Resources.fonts.standard,
+	end_text: false,
 	
 	constructor: function(text, align)
 	{
@@ -214,5 +215,9 @@ var TextMenuItem = MenuItem.extend({
 		else
 			this.font.setColorMask(Resources.colors.white);
 		this.font.drawText(x, y, this.text);
+		if (this.end_text)
+		{
+			this.font.drawText(x + w - this.font.getStringWidth(this.end_text) - 2, y, this.end_text);
+		}
 	}
 });

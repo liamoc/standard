@@ -178,7 +178,12 @@ var BattleScene = Scene.extend({
 						}
 					}
 					// now add it to the list
-					submenu.addItem(new TextMenuItem(filtered[i].getMenuText(), ALIGN_LEFT), i);
+					var item = new TextMenuItem(filtered[i].getMenuText(), ALIGN_LEFT);
+					var et = filtered[i].getMenuEndText();
+					if (et)
+						item.end_text = et;
+					submenu.addItem(item, i);
+					
 				}
 				var lt = this;
 				submenu.allowCancel = true;
