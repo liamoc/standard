@@ -9,6 +9,7 @@ var Item = Class.extend({
 		this.name = data.name;
 		this.flags = data.flags;
 		this.icon = data.icon;
+		this.stats = data.stats;
 		this.description = data.description;
 		serializer.close();
 	},

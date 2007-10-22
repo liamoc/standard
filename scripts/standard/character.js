@@ -12,6 +12,21 @@ var Character = Class.extend({
 		this.atb = 0;
 		this.statusEffects = [];
 		this.abilities = [];
+		this.equipment = data.equipment;
+	},
+	getStat: function(stat)
+	{
+		var val = this.stats[stat];
+		for (var i in this.equipment)
+		{
+			if (this.equipment[i].stats[stat])
+				val += this.equipment[i].stats[stat];
+		}
+		return val;
+	},
+	damage: function(amount)
+	{
+		this.stats.hp = Math.min(this.stats.maxhp, Math.max(0, this.stats.hp - amount));
 	},
 	
 	getAtbModifier: function()

@@ -22,11 +22,14 @@ var BattleScene = Scene.extend({
 		this.currentCommandMenu = 0;
 		this.partyList = new PartyList();
 		this.charGraphics = [];
+		this.waitingCommandQueues = [];
+		this.currentCommandQueue = false;
 		for (var i = 0; i < Party.characters.length; i++)
 		{
 			this.charGraphics.push(new CharacterGraphic(Party.characters[i], 260 + i * 8, 72 + i * 20));
 			this.charGraphics[this.charGraphics.length-1].facing = "west";
 			this.charGraphics[this.charGraphics.length-1].setDirection("west_idle");
+			Party.characters[i].graphic = this.charGraphics[this.charGraphics.length-1];
 		}
 	},
 	
@@ -68,6 +71,12 @@ var BattleScene = Scene.extend({
 			{
 				this.requestCommand(Party.characters[i]);
 			}
+		}
+		
+		if ((!this.currentCommandQueue || this.currentCommandQueue.finished) && this.waitingCommandQueues.length)
+		{
+			this.currentCommandQueue = this.waitingCommandQueues.splice(0, 1)[0];
+			this.currentCommandQueue.start();
 		}
 	},
 	requestCommand: function(character)
@@ -112,12 +121,56 @@ var BattleScene = Scene.extend({
 		this.commandMenu = menu;
 		this.partyList.selectCharacter(c);
 	},
+	damage: function(action, source, targets)
+	{
+		var damages = DamageTypes[action.damageType](action, source, targets);
+		
+		for (var i = 0; i < damages.length; i++)
+		{
+			targets[i].damage(damages[i]);
+			Screen.attach(8, new DamageNumbers(damages[i], targets[i].graphic.center.x, targets[i].graphic.center.y));
+		}
+	},
+	invokeAction: function(action, source, targets)
+	{
+		var queue = action.battleEffect(source, targets);
+		this.waitingCommandQueues.push(queue);
+	},
 	performCommand: function(command)
 	{
 		switch (command.type)
 		{
-			case "final":
+			case "action":
 				// perform an actual action
+				// choose a target
+				var targetChooser = new TargetChooser(command.action);
+				var lt = this;
+				targetChooser.onFinish = function()
+				{
+					if (targetChooser.canceled)
+					{
+						lt.commandMenu.finished = false;
+					}
+					else
+					{
+						lt.commandMenu.close();
+						lt.invokeAction(command.action, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets);
+						lt.commandMenu.close();
+						lt.commandAvailable[lt.currentCommandMenu].atb = 0;
+						lt.commandAvailable.splice(lt.currentCommandMenu, 1);
+						if (lt.currentCommandMenu >= lt.commandAvailable.length)
+							lt.currentCommandMenu = lt.commandAvailable.length;
+						if (lt.commandAvailable.length)
+						{
+							lt.showCommandWindow();
+						}	
+						else
+						{
+							lt.partyList.selectCharacter(false);
+						}
+					}
+				}
+				Screen.attach(7, targetChooser);
 				break;
 			case "menu":
 				// show a submenu
@@ -186,6 +239,10 @@ var BattleScene = Scene.extend({
 						if (lt.commandAvailable.length)
 						{
 							lt.showCommandWindow();
+						}
+						else
+						{
+							lt.partyList.selectCharacter(false);
 						}
 					}
 				}

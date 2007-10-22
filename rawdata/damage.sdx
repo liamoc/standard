@@ -1,8 +1,14 @@
 {
 	data: {
-		physical: function(source, target, ability) {
-			
-			return 9999;
+		physical: function(action, source, targets) {
+			var damages = [];
+			for (var i = 0; i < targets.length; i++)
+			{
+				var base = source.getStat("attack") - targets[i].getStat("defense");
+				var bonus = Random(source.getStat("strength"), ((source.stats.level + source.getStat("strength")) / 8)) + source.getStat("strength");
+				damages.push(base * bonus);
+			}
+			return damages;
 		}			
 	},
 	

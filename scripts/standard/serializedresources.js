@@ -30,6 +30,7 @@ var SerializedResources = Class.extend({
 	{
 		get: function(path, num)
 		{
+			if (!num) num = 1;
 			return {
 				className: "Item",
 				save: function(s) { s.write(path); s.write(num); }
@@ -43,6 +44,17 @@ var SerializedResources = Class.extend({
 		{
 			return {
 				className: "Monster",
+				save: function(s) { s.write(path); }
+			};
+		}
+	},
+	
+	action:
+	{
+		get: function(path)
+		{
+			return {
+				className: "Action",
 				save: function(s) { s.write(path); }
 			};
 		}

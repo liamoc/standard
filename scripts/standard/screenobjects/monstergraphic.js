@@ -5,6 +5,10 @@ var MonsterGraphic = ScreenObject.extend({
 		this.image = this.monster.image;
 		this.x = monster.x;
 		this.y = monster.y;
+		this.center = {
+			x: monster.x + monster.image.width / 2,
+			y: monster.y + monster.image.height / 2
+		};
 	},
 	render: function()
 	{

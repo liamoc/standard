@@ -2,8 +2,8 @@
 	data: {
 		attack: {
 			name: "Attack",
-			type: "final",
-			effect: "attack"
+			type: "action",
+			action: SerializedResources.action.get("attack.sda")
 		},
 		
 		item: {

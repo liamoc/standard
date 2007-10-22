@@ -43,6 +43,8 @@ RequireScript("standard/monster.js");
 RequireScript("standard/item.js");
 RequireScript("standard/commands.js");
 RequireScript("standard/damagetypes.js");
+RequireScript("standard/action.js");
+RequireScript("standard/battlequeue.js");
 
 
 // Include all the Screen objects
@@ -68,6 +70,8 @@ RequireScript("standard/screenobjects/enemylist.js");
 RequireScript("standard/screenobjects/partylist.js");
 RequireScript("standard/screenobjects/monstergraphic.js");
 RequireScript("standard/screenobjects/charactergraphic.js");
+RequireScript("standard/screenobjects/targetchooser.js");
+RequireScript("standard/screenobjects/damagenumbers.js");
 
 // Include all the Scene objects
 RequireScript("standard/scene/scene.js");
@@ -111,6 +115,7 @@ var Standard = Class.extend({
 		Sounds.loadEffectMapping();
 		
 		Commands.load();
+		DamageTypes.load();
 		
 		MapEngine("entry.rmp", 60);
 	},

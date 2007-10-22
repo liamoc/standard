@@ -7,11 +7,11 @@
 			canEquip: true
 		},
 		stats: {
-			strength: 10,
+			strength: 0,
 			magic: 0,
 			spirit: 0,
 			speed: 0,
-			
+			attack: 20,
 			evade: 0,
 			defense: 0,
 			magic_evade: 0,

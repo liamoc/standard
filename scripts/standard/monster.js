@@ -9,7 +9,14 @@ var Monster = Class.extend({
 		this.x = 0;
 		this.y = 0;
 	},
-	
+	damage: function(amount)
+	{
+		this.stats.hp = Math.min(this.stats.maxhp, Math.max(0, this.stats.hp - amount));
+	},
+	getStat: function(stat)
+	{
+		return this.stats[stat];
+	},
 	createGraphic: function()
 	{
 		this.graphic = new MonsterGraphic(this, this.x, this.y);

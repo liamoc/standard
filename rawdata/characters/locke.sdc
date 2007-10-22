@@ -2,21 +2,24 @@
 	data: {
 		name: "Locke",
 		stats: {
-			hp: 200,
-			maxhp: 200,
-			mp: 60,
-			maxmp: 60,
-			level: 1,
+			hp: 450,
+			maxhp: 450,
+			mp: 90,
+			maxmp: 90,
+			level: 15,
 			
-			strength: 10,
-			magic: 10,
-			spirit: 10,
-			speed: 10,
-			
+			strength: 20,
+			magic: 20,
+			spirit: 20,
+			speed: 20,
+			attack: 20,
 			evade: 10,
-			defense: 10,
-			magic_evade: 10,
-			magic_defense: 10,
+			defense: 20,
+			magic_evade: 20,
+			magic_defense: 20,
+		},
+		equipment: {
+			weapon: SerializedResources.item.get("knife.sdi")
 		},
 		spriteset_path: "locke.rss",
 		commands: [
