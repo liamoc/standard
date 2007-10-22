@@ -200,9 +200,12 @@ var BattleScene = Scene.extend({
 						lt.commandMenu.close();
 						lt.commandAvailable[lt.currentCommandMenu].atb = 0;
 						lt.commandAvailable.splice(lt.currentCommandMenu, 1);
-						if (lt.currentCommandMenu == lt.commandAvailable.length)
-							lt.currentCommandMenu--;
-						lt.showCommandWindow();
+						if (lt.currentCommandMenu >= lt.commandAvailable.length)
+							lt.currentCommandMenu = lt.commandAvailable.length;
+						if (lt.commandAvailable.length)
+						{
+							lt.showCommandWindow();
+						}
 					}
 				}
 				Screen.attach(7, submenu);
