@@ -11,7 +11,16 @@ var Item = Class.extend({
 		this.icon = data.icon;
 		this.stats = data.stats;
 		this.description = data.description;
+		this.action = data.action;
 		serializer.close();
+	},
+	use: function()
+	{
+		this.num--;
+		if (this.num == 0)
+		{
+			Party.items.remove(this);
+		}
 	},
 	getMenuText: function()
 	{

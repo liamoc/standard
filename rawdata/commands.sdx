@@ -17,6 +17,18 @@
 			}
 		},
 		
+		throw_item: {
+			name: "Throw",
+			type: "menu",
+			filter: {
+				source: "items",
+				enable: function(item, character) {
+					return item.flags.canThrow;
+				}
+			},
+			customAction: SerializedResources.action.get("throw.sda")
+		},
+		
 		wmagic: {
 			name: "White Magic",
 			type: "menu",

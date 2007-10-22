@@ -121,9 +121,9 @@ var BattleScene = Scene.extend({
 		this.commandMenu = menu;
 		this.partyList.selectCharacter(c);
 	},
-	damage: function(action, source, targets)
+	damage: function(action, source, targets, extra)
 	{
-		var damages = DamageTypes[action.damageType](action, source, targets);
+		var damages = DamageTypes[action.damageType](action, source, targets, extra);
 		
 		for (var i = 0; i < damages.length; i++)
 		{
@@ -131,9 +131,9 @@ var BattleScene = Scene.extend({
 			Screen.attach(8, new DamageNumbers(damages[i], targets[i].graphic.center.x, targets[i].graphic.center.y));
 		}
 	},
-	invokeAction: function(action, source, targets)
+	invokeAction: function(action, source, targets, extra)
 	{
-		var queue = action.battleEffect(source, targets);
+		var queue = action.battleEffect(source, targets, extra);
 		this.waitingCommandQueues.push(queue);
 	},
 	performCommand: function(command)
@@ -216,11 +216,12 @@ var BattleScene = Scene.extend({
 					var et = filtered[i].getMenuEndText();
 					if (et)
 						item.end_text = et;
-					submenu.addItem(item, i);
+					submenu.addItem(item, filtered[i]);
 					
 				}
 				var lt = this;
 				submenu.allowCancel = true;
+				submenu.autoClose = false;
 				submenu.onFinish = function()
 				{
 					if (submenu.canceled)
@@ -230,20 +231,42 @@ var BattleScene = Scene.extend({
 					}
 					else
 					{
-						submenu.close()
-						lt.commandMenu.close();
-						lt.commandAvailable[lt.currentCommandMenu].atb = 0;
-						lt.commandAvailable.splice(lt.currentCommandMenu, 1);
-						if (lt.currentCommandMenu >= lt.commandAvailable.length)
-							lt.currentCommandMenu = lt.commandAvailable.length;
-						if (lt.commandAvailable.length)
+						var targetChooser = new TargetChooser(command.customAction ? command.customAction : submenu.result.action);
+						targetChooser.onFinish = function()
 						{
-							lt.showCommandWindow();
+							if (targetChooser.canceled)
+							{
+								submenu.finished = false;
+							}
+							else
+							{
+								lt.commandMenu.close();
+								submenu.result.use();
+								submenu.close();
+								if (command.customAction)
+								{
+									lt.invokeAction(command.customAction, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets, submenu.result);
+								}
+								else
+								{
+									lt.invokeAction(submenu.result.action, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets);
+								}
+								lt.commandAvailable[lt.currentCommandMenu].atb = 0;
+								lt.commandAvailable.splice(lt.currentCommandMenu, 1);
+								if (lt.currentCommandMenu >= lt.commandAvailable.length)
+									lt.currentCommandMenu = lt.commandAvailable.length;
+								if (lt.commandAvailable.length)
+								{
+									lt.showCommandWindow();
+								}	
+								else
+								{
+									lt.partyList.selectCharacter(false);
+								}
+							}
 						}
-						else
-						{
-							lt.partyList.selectCharacter(false);
-						}
+						Screen.attach(7, targetChooser);
+
 					}
 				}
 				Screen.attach(7, submenu);

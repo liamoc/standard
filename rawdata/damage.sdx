@@ -9,7 +9,17 @@
 				damages.push(base * bonus);
 			}
 			return damages;
-		}			
+		},
+		throw_item: function(action, source, targets, item) {
+			var damages = [];
+			for (var i = 0; i < targets.length; i++)
+			{
+				var base = item.stats.attack * 4 - targets[i].getStat("defense");
+				var bonus = Random(item.stats.attack, (item.stats.attack + 50) / 8) + item.stats.attack;
+				damages.push(base * bonus);
+			}
+			return damages;
+		}
 	},
 	
 	compilePath: "damage.sdx"

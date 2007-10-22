@@ -25,7 +25,7 @@
 		commands: [
 			"attack",
 			"wmagic",
-			false,
+			"throw_item",
 			"item"
 		]
 	},

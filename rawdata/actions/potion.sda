@@ -1,0 +1,22 @@
+{
+	data: {
+		target: "single",
+		targetAllies: true,
+		targetEnemies: true,
+		defaultTarget: "ally",
+		
+		battleEffect: function(source, targets) {
+			var queue = new BattleQueue();
+			queue.add(function()
+			{
+				for (var i = 0; i < targets.length; i++)
+				{
+					targets[i].damage(-150);
+				}
+			});
+			return queue;
+		}
+	},
+	
+	compilePath: "actions/potion.sda"
+}

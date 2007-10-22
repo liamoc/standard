@@ -1,0 +1,16 @@
+{
+	data: {
+		target: "single",
+		targetAllies: true,
+		targetEnemies: true,
+		defaultTarget: "enemy",
+		damageType: "throw_item",
+		battleEffect: function(source, targets, item) {
+			var queue = new BattleQueue();
+			queue.add(Event.currentBattle.damage, [this, source, targets, item]);
+			return queue;
+		}
+	},
+	
+	compilePath: "actions/throw.sda"
+}

@@ -7,7 +7,8 @@
 			canEquip: false
 		},
 		icon: SerializedResources.image.get("icons/potion.png"),
-		description: "Restores 150 HP."
+		description: "Restores 150 HP.",
+		action: SerializedResources.action.get("potion.sda")
 	},
 	
 	compilePath: "items/potion.sdi"
