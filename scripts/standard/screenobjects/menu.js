@@ -32,15 +32,21 @@ var Menu = Window.extend({
 	onAdd: function()
 	{
 		this.base();
-		if (this.pointer.standalone) Screen.attach(7, this.pointer);
-		else this.pointer.onAdd();	// simulate
+		if (this.items.length)
+		{
+			if (this.pointer.standalone) Screen.attach(7, this.pointer);
+			else this.pointer.onAdd();	// simulate
+		}
 	},
 	
 	onRemove: function()
 	{
 		this.base();
-		if (this.pointer.standalone) Screen.detach(this.pointer);
-		else this.pointer.onRemove();
+		if (this.items.length)
+		{
+			if (this.pointer.standalone) Screen.detach(this.pointer);
+			else this.pointer.onRemove();
+		}
 	},
 	
 	addItem: function(item, result)
@@ -210,7 +216,9 @@ var TextMenuItem = MenuItem.extend({
 		{
 			x = x + w - this.font.getStringWidth(this.text);
 		}
-		if (selected && this.selectedColor)
+		if (this.disabled)
+			this.font.setColorMask(Resources.colors.white50);		
+		else if (selected && this.selectedColor)
 			this.font.setColorMask(this.selectedColor);
 		else
 			this.font.setColorMask(Resources.colors.white);

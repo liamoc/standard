@@ -11,8 +11,8 @@
 			type: "menu",
 			filter: {
 				source: "items",
-				enable: {
-					canUseBattle: true
+				enable: function(item, character) {
+					return item.flags.canUseBattle;
 				}
 			}
 		},
@@ -22,14 +22,13 @@
 			type: "menu",
 			filter: {
 				source: "abilities",
-				require: {
-					type: "wmagic",
+				require: function(item)
+				{
+					return item.type == "wmagic";
 				},
-				enable: {
-					mp: function(value, character)
-					{
-						return value < character.stats.mp;
-					}
+				enable: function(item, character)
+				{
+					return item.mpCost < character.stats.mp;
 				}
 			}
 		}

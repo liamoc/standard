@@ -1,0 +1,25 @@
+{
+	data: {
+		name: "Knife",
+		flags: {
+			canUseField: false,
+			canUseBattle: false,
+			canEquip: true
+		},
+		stats: {
+			strength: 10,
+			magic: 0,
+			spirit: 0,
+			speed: 0,
+			
+			evade: 0,
+			defense: 0,
+			magic_evade: 0,
+			magic_defense: 0
+		},
+		icon: SerializedResources.image.get("icons/potion.png"),
+		description: "A standard knife."
+	},
+	
+	compilePath: "items/knife.sdi"
+}

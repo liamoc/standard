@@ -1,6 +1,7 @@
 {
 	data: {
-		physical: function(source, target) {
+		physical: function(source, target, ability) {
+			
 			return 9999;
 		}			
 	},

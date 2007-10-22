@@ -1,9 +1,11 @@
 {
 	data: {
 		name: "Potion",
-		canUseField: true,
-		canUseBattle: true,
-		canEquip: false,
+		flags: {
+			canUseField: true,
+			canUseBattle: true,
+			canEquip: false
+		},
 		icon: SerializedResources.image.get("icons/potion.png"),
 		description: "Restores 150 HP."
 	},

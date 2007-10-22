@@ -7,8 +7,7 @@ var Item = Class.extend({
 		var serializer = new Serializer("../data/items/" + path);
 		var data = serializer.read();
 		this.name = data.name;
-		this.canUse = data.canUse;
-		this.canEquip = data.canEquip;
+		this.flags = data.flags;
 		this.icon = data.icon;
 		this.description = data.description;
 		serializer.close();

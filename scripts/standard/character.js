@@ -11,6 +11,7 @@ var Character = Class.extend({
 		this.spriteset = Cache.getSpriteset(this.spriteset_path);
 		this.atb = 0;
 		this.statusEffects = [];
+		this.abilities = [];
 	},
 	
 	getAtbModifier: function()

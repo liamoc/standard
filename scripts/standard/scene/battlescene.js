@@ -132,28 +132,14 @@ var BattleScene = Scene.extend({
 						source_list = Party.items;
 						break;
 					case "abilities":
+						source_list = this.commandAvailable[this.currentCommandMenu].abilities;
 						break;
 				}
 				var filtered = [];
 				// remove items that don't meet REQUIRE
 				if (command.filter.require)
 				{
-					for (var i = 0; i < source_list.length; i++)
-					{
-						var passup = false;
-						for (var filter_field in command.filter.require)
-						{
-							if (source_list[i][filter_field] != command.filter.require[filter_field])
-							{
-								passup = true;
-								break;
-							}
-						}
-						if (!passup)
-						{
-							filtered.push(source_list[i]);
-						}
-					}
+					filtered = source_list.filter(command.filter.require);
 				}
 				else
 				{
@@ -168,17 +154,12 @@ var BattleScene = Scene.extend({
 					// does this item meet ENABLE?
 					if (command.filter.enable)
 					{
-						for (var enable_field in command.filter.enable)
-						{
-							if (filtered[i][enable_field] != command.filter.enable[enable_field])
-							{
-								enable = false;
-								break;
-							}
-						}
+						if (!command.filter.enable(filtered[i], this.commandAvailable[this.currentCommandMenu]))
+							enable = false;
 					}
 					// now add it to the list
 					var item = new TextMenuItem(filtered[i].getMenuText(), ALIGN_LEFT);
+					item.disabled = !enable;
 					var et = filtered[i].getMenuEndText();
 					if (et)
 						item.end_text = et;

@@ -53,6 +53,8 @@ Array.prototype.sliceWhere = function(predicate)
 	return slice;
 }
 
+Array.prototype.filter = Array.prototype.sliceWhere;
+
 Array.prototype.forEach = function(predicate)
 {
 	for (var i = 0; i < this.length; i++)

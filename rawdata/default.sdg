@@ -3,7 +3,8 @@
 		party: {
 			money: 0,
 			items: [
-				SerializedResources.item.get("potion.sdi", 10)
+				SerializedResources.item.get("potion.sdi", 10),
+				SerializedResources.item.get("knife.sdi", 99)
 			],
 			characters: [
 				SerializedResources.character.get("locke.sdc"),
