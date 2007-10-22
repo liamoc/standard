@@ -6,11 +6,9 @@ var Commands = Class.extend({
 		var serializer = new Serializer("../data/commands.sdx");
 		var data = serializer.read();
 		serializer.close();
-		for (var i = 0; i < data.length; i++)
+		for (var cid in data)
 		{
-			var command = data[i];
-			
-			this[command.id] = command;
+			this[cid] = data[cid];
 		}
 	}
 });

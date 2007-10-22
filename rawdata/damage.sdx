@@ -1,0 +1,9 @@
+{
+	data: {
+		physical: function(source, target) {
+			return 9999;
+		}			
+	},
+	
+	compilePath: "damage.sdx"
+}

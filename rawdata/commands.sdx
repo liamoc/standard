@@ -1,14 +1,12 @@
 {
-	data: [
-		{
-			id: "attack",
+	data: {
+		attack: {
 			name: "Attack",
 			type: "final",
 			effect: "attack"
 		},
 		
-		{
-			id: "item",
+		item: {
 			name: "Item",
 			type: "menu",
 			filter: {
@@ -19,8 +17,7 @@
 			}
 		},
 		
-		{
-			id: "wmagic",
+		wmagic: {
 			name: "White Magic",
 			type: "menu",
 			filter: {
@@ -36,7 +33,7 @@
 				}
 			}
 		}
-	],
+	},
 	
 	compilePath: "commands.sdx"
 }

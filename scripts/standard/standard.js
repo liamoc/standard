@@ -42,6 +42,7 @@ RequireScript("standard/event.js");
 RequireScript("standard/monster.js");
 RequireScript("standard/item.js");
 RequireScript("standard/commands.js");
+RequireScript("standard/damagetypes.js");
 
 
 // Include all the Screen objects
