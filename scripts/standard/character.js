@@ -11,7 +11,7 @@ var Character = Class.extend({
 		this.spriteset = Cache.getSpriteset(this.spriteset_path);
 		this.atb = 0;
 		this.statusEffects = [];
-		this.abilities = [];
+		this.abilities = data.abilities;
 		this.usable_abilities = data.usable_abilities;
 		this.equipment = data.equipment;
 	},
@@ -39,7 +39,7 @@ var Character = Class.extend({
 				var serializer = new Serializer("../data/abilities/" + ability + ".sdl");
 				var data = serializer.read();
 				serializer.close();
-				var ability = new Ability(data)
+				var ability = new Ability(ability, data)
 				ability.enabled = true;
 				ability.ap = 0;
 				this.abilities.push(ability);
@@ -95,11 +95,18 @@ var Character = Class.extend({
 			if (this.equipment[i].stats[stat])
 				val += this.equipment[i].stats[stat];
 		}
+		for (var i = 0; i < this.abilities.length; i++)
+		{
+			if (this.abilities[i].equipped && this.abilities[i].stat_effect[stat])
+			{
+				val = this.abilities[i].stat_effect[stat](val);
+			}
+		}
 		return val;
 	},
 	damage: function(amount)
 	{
-		this.stats.hp = Math.min(this.stats.maxhp, Math.max(0, this.stats.hp - amount));
+		this.stats.hp = Math.min(this.getStat("maxhp"), Math.max(0, this.stats.hp - amount));
 	},
 	
 	getAtbModifier: function()

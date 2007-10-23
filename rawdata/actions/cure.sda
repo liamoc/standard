@@ -8,6 +8,38 @@
 		power: 20,
 		battleEffect: function(source, targets) {
 			var queue = new BattleQueue();
+			for (var i = 0; i < targets.length; i++)
+			{
+				var params = {
+					maxParticles: 200,
+					incremental: true,
+					decremental: true,
+					image: Cache.getImage("cure-particle.png"),
+					blendMode: ADD,
+					x: targets[i].graphic.x,
+					y: targets[i].graphic.y,
+					aging: {
+						min: 0.0,
+						max: 0.05,
+					},
+					area: {
+						type: PE_SQUARE,
+						x_min: 0,
+						x_max: targets[i].graphic.width - 4,
+						y_min: targets[i].graphic.height,
+						y_max: targets[i].graphic.height
+					},
+					velocity: {
+						type: PE_SQUARE,
+						x_min: 0,
+						x_max: 0,
+						y_min: -0.3,
+						y_max: -0.1
+					}
+				};
+				queue.add(Event.currentBattle.particleAnimation, [params, 60, true]);
+			}
+			queue.add(Event.wait, [30]);
 			queue.add(Event.currentBattle.damage, [this, source, targets]);
 			return queue;
 		}

@@ -6,6 +6,7 @@
 			for (var i = 0; i < Party.characters.length; i++)
 			{
 				Party.characters[i].equip("weapon", Party.items[1]);
+				Party.characters[i].abilities[1].equipped = true;
 			}
 			var eq = new EventQueue();
 			//eq.add(Event.torchOn);

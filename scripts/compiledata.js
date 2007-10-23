@@ -11,7 +11,7 @@ function CompileLoadData(file)
 	}
 	catch (e)
 	{
-		Abort("Error in file " + file);
+		Abort("Error in file " + file + "\n" + e);
 	}
 }
 

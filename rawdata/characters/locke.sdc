@@ -12,7 +12,7 @@
 			magic: 10,
 			defense: 10,
 			spirit: 10,
-			speed: 10,
+			speed: 1000,
 
 			evade: 10,
 			magic_evade: 10,
@@ -30,8 +30,10 @@
 		],
 		
 		usable_abilities: [
-			"cure"
-		]
+			"cure", "hp10"
+		],
+		
+		abilities: []
 	},
 	
 	compilePath: "characters/locke.sdc"

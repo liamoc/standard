@@ -53,6 +53,19 @@ var BattleScene = Scene.extend({
 		Standard.addTimer(this, this.tick, 1);
 	},
 	
+	particleAnimation: function(params, frames, dontblock)
+	{
+		var anim = new ParticleAnimation(params, frames);
+		Screen.attach(7, anim);
+		if (!dontblock)
+		{
+			return function()
+			{
+				return anim.finished;
+			};
+		}
+	},
+	
 	onLeave: function()
 	{
 		Standard.removeTimer(this, this.tick);

@@ -18,7 +18,8 @@
 			magic_evade: 0
 		},
 		abilities: [
-			"cure"
+			"cure",
+			"hp10"
 		],
 		icon: SerializedResources.image.get("icons/potion.png"),
 		description: "A standard knife."

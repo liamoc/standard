@@ -1,0 +1,18 @@
+{
+	data: {
+		id: "hp10",
+		name: "HP+10%",
+		type: "support",
+		ap_required: 15,
+		mp_cost: 10,
+		equip_cost: 1,
+		stat_effect: {
+			maxhp: function(val)
+			{
+				return Math.round(val * 1.10);
+			}
+		},
+		description: "Adds 10% to your maximum HP."
+	},
+	compilePath: "abilities/hp10.sdl"
+}

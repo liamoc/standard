@@ -73,6 +73,7 @@ RequireScript("standard/screenobjects/monstergraphic.js");
 RequireScript("standard/screenobjects/charactergraphic.js");
 RequireScript("standard/screenobjects/targetchooser.js");
 RequireScript("standard/screenobjects/damagenumbers.js");
+RequireScript("standard/screenobjects/particleanimation.js");
 
 // Include all the Scene objects
 RequireScript("standard/scene/scene.js");

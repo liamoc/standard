@@ -29,7 +29,7 @@ var PartyList = Window.extend({
 			var hp_len = new String(hp_val).length;
 			var num_zeros = 4 - hp_len;
 			var hp_zeros = "0".repeat(num_zeros);
-			var mhp_val = Party.characters[i].stats.maxhp;
+			var mhp_val = Party.characters[i].getStat("maxhp");
 			var mhp_len = new String(mhp_val).length;
 			var mhp_num_zeros = 4 - mhp_len;
 			var mhp_zeros = "0".repeat(num_zeros);
@@ -41,7 +41,7 @@ var PartyList = Window.extend({
 			var mhp_r_x = hp_middle + 4 + this.font.getStringWidth("0") * mhp_num_zeros;
 			
 			var hpbmw = this.font.getStringWidth("0") * 4 - 2;
-			var hpbw = Party.characters[i].stats.hp / Party.characters[i].stats.maxhp * hpbmw;
+			var hpbw = hp_val / mhp_val * hpbmw;
 			Rectangle(mhp_x, y + 10, hpbw, 2, Resources.colors.green);
 			Rectangle(mhp_x + hpbw, y + 10, hpbmw - hpbw, 2, Resources.colors.darkgreen);
 			

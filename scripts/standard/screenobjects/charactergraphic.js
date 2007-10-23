@@ -10,6 +10,8 @@ var CharacterGraphic = ScreenObject.extend({
 			x: x + character.spriteset.images[0].width / 2,
 			y: y + character.spriteset.images[0].height / 2
 		};
+		this.width = this.spriteset.images[0].width;
+		this.height = this.spriteset.images[0].height;
 		this.frame = 0;
 		this.nextFrame = 0;
 		this.currentImage = this.spriteset.images[0];
