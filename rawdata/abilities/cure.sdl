@@ -1,0 +1,17 @@
+{
+	data: {
+		id: "cure",
+		name: "Cure",
+		type: "action",
+		action: SerializedResources.action.get("cure.sda"),
+		action_type: "wmagic",
+		ap_required: 15,
+		mp_cost: 10,
+		flags: {
+			canUseField: true,
+			canUseBattle: true
+		},
+		description: "Restores HP to one target."
+	},
+	compilePath: "abilities/cure.sdl"
+}

@@ -12,7 +12,80 @@ var Character = Class.extend({
 		this.atb = 0;
 		this.statusEffects = [];
 		this.abilities = [];
+		this.usable_abilities = data.usable_abilities;
 		this.equipment = data.equipment;
+	},
+	equip: function(slot, item)
+	{
+		this.equipment[slot] = item;
+		item.use();
+		for (var i = 0; i < item.abilities.length; i++)
+		{
+			var ability = item.abilities[i];
+			// find this ability in our ability list
+			for (var j = 0; j < this.abilities.length; j++)
+			{
+				if (this.abilities[j].id == ability)
+				{
+					this.abilities[j].enabled = true;
+					continue;
+				}
+			}
+			
+			// if we couldn't find it, check if we can actually use this ability
+			if (this.usable_abilities.contains(ability))
+			{
+				// add this ability to our list
+				var serializer = new Serializer("../data/abilities/" + ability + ".sdl");
+				var data = serializer.read();
+				serializer.close();
+				var ability = new Ability(data)
+				ability.enabled = true;
+				ability.ap = 0;
+				this.abilities.push(ability);
+			}
+			// otherwise, do nothing.
+		}
+	},
+	unequip: function(slot)
+	{
+		var item = this.equipment[slot];
+		
+		for (var i = 0; i < item.abilities.length; i++)
+		{
+			var ability = item.abilities[i];
+			// find this ability in our ability list
+			var list_ability = false;
+			for (var j = 0; j < this.abilities.length; j++)
+			{
+				if (this.abilities[j].id == ability)
+				{
+					list_ability = this.abilities[j];
+				}
+			}
+			// is this ability mastered?
+			if (list_ability.ap == list_ability.ap_required)
+			{
+				// we don't need to disable it, check the next ability
+				continue;
+			}
+			// is this ability on any other item?
+			var keep = false;
+			for (var cslot in this.equipment)
+			{
+				if (this.equipment[cslot].abilities.contains(ability))
+				{
+					keep = true;
+					break;
+				}
+			}
+			
+			if (!keep)
+				list_ability.enabled = false;
+		}
+		
+		this.equipment[slot] = false;
+		return item;
 	},
 	getStat: function(stat)
 	{
@@ -49,7 +122,9 @@ var Character = Class.extend({
 			name: this.name,
 			stats: this.stats,
 			spriteset_path: this.spriteset_path,
-			commands: this.commands
+			commands: this.commands,
+			abilities: this.abilities,
+			usable_abilities: this.usable_abilities
 		});
 	},
 	

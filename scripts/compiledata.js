@@ -6,7 +6,13 @@ function CompileLoadData(file)
 	
 	var f = OpenRawFile(file);
 	var json = CreateStringFromByteArray(f.read(f.getSize()));
-	return eval('(' + json + ')');
+	try {
+		return eval('(' + json + ')');
+	}
+	catch (e)
+	{
+		Abort("Error in file " + file);
+	}
 }
 
 function CompileData()

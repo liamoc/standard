@@ -4,9 +4,31 @@
 			var damages = [];
 			for (var i = 0; i < targets.length; i++)
 			{
-				var base = source.getStat("attack") - targets[i].getStat("defense");
-				var bonus = Random(source.getStat("strength"), ((source.stats.level + source.getStat("strength")) / 8)) + source.getStat("strength");
-				damages.push(base * bonus);
+				
+				var source_strength = source.getStat("strength");
+				
+				var strength = source_strength + Random(source_strength / 2, source_strength);
+				var modifier = (source.stats.level * source_strength) / 128 + 2;
+				var defense = targets[i].getStat("defense");
+				//Abort(strength + "," + modifier + "," + defense);
+				damages.push(
+					Math.min(Settings.get("maxDamage"), Math.max(0, Math.floor((strength - defense) * modifier)))
+				);
+				
+			}
+			return damages;
+		},
+		magical_cure: function(action, source, targets) {
+			var damages = [];
+			for (var i = 0; i < targets.length; i++)
+			{
+				var strength = action.power + Random(0, action.power / 8);
+				var modifier  = (source.stats.level*source.getStat("magic")) / 256 + 4;
+				var defense = targets[0].getStat("spirit");
+				
+				damages.push(
+					-Math.min(Settings.get("maxDamage"), Math.max(0, Math.floor((strength - defense) * modifier)))
+				);
 			}
 			return damages;
 		},
@@ -14,9 +36,15 @@
 			var damages = [];
 			for (var i = 0; i < targets.length; i++)
 			{
-				var base = item.stats.attack * 4 - targets[i].getStat("defense");
-				var bonus = Random(item.stats.attack, (item.stats.attack + 50) / 8) + item.stats.attack;
-				damages.push(base * bonus);
+				var source_strength = item.stats.strength * 3;
+				
+				var strength = source_strength + Random(source_strength / 2, source_strength);
+				var modifier = (source.stats.level * source_strength) / 128;
+				var defense = targets[0].getStat("defense");
+				
+				damages.push(
+					Math.min(Settings.get("maxDamage"), Math.max(0, Math.floor((strength - defense) * modifier)))
+				);
 			}
 			return damages;
 		}

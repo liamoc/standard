@@ -4,7 +4,8 @@
 		name: "Standard Engine Test",
 		version: "0.0.4",
 		saveSlots: 20,
-		titleMusic: "hyo-vile.it"
+		titleMusic: "hyo-vile.it",
+		maxDamage: 9999
 	},
 	
 	compilePath: "settings.sds"

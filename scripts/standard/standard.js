@@ -45,6 +45,7 @@ RequireScript("standard/commands.js");
 RequireScript("standard/damagetypes.js");
 RequireScript("standard/action.js");
 RequireScript("standard/battlequeue.js");
+RequireScript("standard/ability.js");
 
 
 // Include all the Screen objects

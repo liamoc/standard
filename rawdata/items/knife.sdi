@@ -8,16 +8,18 @@
 			canThrow: true
 		},
 		stats: {
-			strength: 0,
+			strength: 10,
 			magic: 0,
+			defense: 0,
 			spirit: 0,
 			speed: 0,
-			attack: 20,
+
 			evade: 0,
-			defense: 0,
-			magic_evade: 0,
-			magic_defense: 0
+			magic_evade: 0
 		},
+		abilities: [
+			"cure"
+		],
 		icon: SerializedResources.image.get("icons/potion.png"),
 		description: "A standard knife."
 	},

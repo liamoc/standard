@@ -36,11 +36,11 @@
 				source: "abilities",
 				require: function(item)
 				{
-					return item.type == "wmagic";
+					return item.action_type == "wmagic" && item.enabled;
 				},
 				enable: function(item, character)
 				{
-					return item.mpCost < character.stats.mp;
+					return item.mp_cost < character.stats.mp;
 				}
 			}
 		}

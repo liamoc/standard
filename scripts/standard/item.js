@@ -12,6 +12,7 @@ var Item = Class.extend({
 		this.stats = data.stats;
 		this.description = data.description;
 		this.action = data.action;
+		this.abilities = data.abilities;
 		serializer.close();
 	},
 	use: function()

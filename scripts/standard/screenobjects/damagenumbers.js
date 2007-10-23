@@ -1,14 +1,22 @@
 var DamageNumbers = ScreenObject.extend({
 	constructor: function(amount, x, y)
 	{
-		this.num = amount;
+		this.num = Math.abs(amount);
+		if (amount < 0)
+		{
+			this.color = CreateColor(100, 255, 150);
+		}
+		else
+		{
+			this.color = CreateColor(255, 255, 255);
+		}
 		this.x = x;
 		this.y = y;
 		this.font = Resources.fonts.numeric;
 		this.nwidth = this.font.getStringWidth(this.num);
 		this.f = 255 / 60;
 		this.alpha = 255;
-		this.color = CreateColor(255, 255, 255);
+
 	},
 	
 	onAdd: function()

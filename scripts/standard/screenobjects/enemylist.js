@@ -9,6 +9,7 @@ var EnemyList = Window.extend({
 	
 	renderContent: function()
 	{
+		this.font.setColorMask(Resources.colors.white);
 		for (var i = 0; i < Event.currentBattle.monsters.length; i++)
 		{
 			this.font.drawText(this.x, this.y + i * (72 / 4), Event.currentBattle.monsters[i].name);

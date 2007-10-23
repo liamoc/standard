@@ -8,6 +8,7 @@ var Action = Class.extend({
 		this.damageType = data.damageType;
 		this.battleEffect = data.battleEffect;
 		this.fieldEffect = data.fieldEffect;
+		this.power = data.power;
 	}
 });
 

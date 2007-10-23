@@ -27,6 +27,7 @@ var Menu = Window.extend({
 		this.onFinish = false;
 		this.finished = false;
 		this.pointer = new BoxMenuPointer();
+		this.pointer.moveTo(this.x, this.y, this.w, 0, true);
 	},
 	
 	onAdd: function()
@@ -122,12 +123,15 @@ var Menu = Window.extend({
 		switch (key)
 		{
 			case Config.controls.up:
+				if (!this.items.length) break;
 				this.selected = Math.max(0, this.selected - 1);
 				break;
 			case Config.controls.down:
+				if (!this.items.length) break;
 				this.selected = Math.min(this.selected + 1, this.items.length - 1);
 				break;
 			case Config.controls.accept:
+				if (!this.items.length) break;
 				if (!this.items[this.selected].disabled)
 				{
 					Sounds.play("accept");

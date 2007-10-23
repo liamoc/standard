@@ -8,25 +8,29 @@
 			maxmp: 90,
 			level: 15,
 			
-			strength: 20,
-			magic: 20,
-			spirit: 20,
-			speed: 20,
-			attack: 20,
+			strength: 10,
+			magic: 10,
+			defense: 10,
+			spirit: 10,
+			speed: 10,
+
 			evade: 10,
-			defense: 20,
-			magic_evade: 20,
-			magic_defense: 20,
+			magic_evade: 10,
 		},
 		equipment: {
-			weapon: SerializedResources.item.get("knife.sdi")
+			
 		},
 		spriteset_path: "locke.rss",
+		
 		commands: [
 			"attack",
 			"wmagic",
 			"throw_item",
 			"item"
+		],
+		
+		usable_abilities: [
+			"cure"
 		]
 	},
 	

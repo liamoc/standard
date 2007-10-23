@@ -90,6 +90,10 @@ var BattleScene = Scene.extend({
 	},
 	showCommandWindow: function()
 	{
+		if (this.currentCommandMenu > this.commandAvailable.length - 1)
+		{
+			this.currentCommandMenu = this.commandAvailable.length - 1;
+		}
 		var c = this.commandAvailable[this.currentCommandMenu];
 		var menu = new Menu(24, 154, 70, Resources.fonts.standard.getHeight() * 4, false);
 		menu.autoClose = false;
@@ -241,7 +245,7 @@ var BattleScene = Scene.extend({
 							else
 							{
 								lt.commandMenu.close();
-								submenu.result.use();
+								submenu.result.use(lt.commandAvailable[lt.currentCommandMenu]);
 								submenu.close();
 								if (command.customAction)
 								{

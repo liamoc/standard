@@ -3,6 +3,10 @@
 	{
 		if (!State.displayedMessage)
 		{
+			for (var i = 0; i < Party.characters.length; i++)
+			{
+				Party.characters[i].equip("weapon", Party.items[1]);
+			}
 			var eq = new EventQueue();
 			//eq.add(Event.torchOn);
 			eq.add(Event.messageBox, [Strings.get("test_msg")]);

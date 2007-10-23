@@ -3,22 +3,21 @@
 		image: SerializedResources.image.get("monsters/zombie_demon.png"),
 		name: "Lich",
 		stats: {
-			level: 20,
+			level: 10,
 			
 			hp: 500,
 			mp: 50,
 			maxhp: 500,
 			maxmp: 50,
 			
-			strength: 20,
-			magic: 20,
-			spirit: 20,
-			speed: 20,
-			attack: 20,
-			evade: 20,
-			defense: 20,
-			magic_evade: 20,
-			magic_defense: 20,
+			strength: 10,
+			magic: 10,
+			defense: 10,
+			spirit: 10,
+			speed: 10,
+
+			evade: 10,
+			magic_evade: 10,
 		}
 	},
 	
