@@ -36,7 +36,7 @@ var DamageNumbers = ScreenObject.extend({
 		this.color.alpha = this.alpha;
 		if (this.alpha == 0)
 		{
-			Standard.removeTimer(this, this.close);
+			Standard.removeTimer(this, this.tick);
 			Screen.detach(this);
 		}
 	}

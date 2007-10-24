@@ -1,5 +1,13 @@
 {
 	data: {
+		absolute: function(action, source, targets) {
+			var damages = [];
+			for (var i = 0; i < targets.length; i++)
+			{
+				damages.push(action.power);
+			}
+			return damages;
+		},
 		physical: function(action, source, targets) {
 			var damages = [];
 			for (var i = 0; i < targets.length; i++)

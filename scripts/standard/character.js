@@ -14,6 +14,7 @@ var Character = Class.extend({
 		this.abilities = data.abilities;
 		this.usable_abilities = data.usable_abilities;
 		this.equipment = data.equipment;
+		this.displayHp = this.stats.hp;
 	},
 	equip: function(slot, item)
 	{
@@ -107,6 +108,8 @@ var Character = Class.extend({
 	damage: function(amount)
 	{
 		this.stats.hp = Math.min(this.getStat("maxhp"), Math.max(0, this.stats.hp - amount));
+		this.displayHpTick = 60;
+		this.displayHpPerFrame = (this.stats.hp - this.displayHp) / 60;
 	},
 	
 	getAtbModifier: function()

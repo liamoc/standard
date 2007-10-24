@@ -25,7 +25,7 @@ var PartyList = Window.extend({
 			this.font.drawText(this.x + 2, y, Party.characters[i].name);
 			
 			
-			var hp_val = Party.characters[i].stats.hp;
+			var hp_val = Math.round(Party.characters[i].displayHp);
 			var hp_len = new String(hp_val).length;
 			var num_zeros = 4 - hp_len;
 			var hp_zeros = "0".repeat(num_zeros);
@@ -41,10 +41,21 @@ var PartyList = Window.extend({
 			var mhp_r_x = hp_middle + 4 + this.font.getStringWidth("0") * mhp_num_zeros;
 			
 			var hpbmw = this.font.getStringWidth("0") * 4 - 2;
-			var hpbw = hp_val / mhp_val * hpbmw;
+			var hpbw = Party.characters[i].stats.hp / mhp_val * hpbmw;
+			
+			// Get the length of the display difference bar
+			
+			var ddbw = (Party.characters[i].displayHp / mhp_val * hpbmw) - hpbw;
+			
 			Rectangle(mhp_x, y + 10, hpbw, 2, Resources.colors.green);
 			Rectangle(mhp_x + hpbw, y + 10, hpbmw - hpbw, 2, Resources.colors.darkgreen);
-			
+			if (ddbw < 0)
+			{
+				ddbw = Math.floor(Math.abs(ddbw));
+				Rectangle(mhp_x + hpbw - ddbw, y + 10, ddbw, 2, Resources.colors.white);
+			}
+			else
+				Rectangle(mhp_x + hpbw, y + 10, ddbw, 2, Resources.colors.red);
 			Resources.fonts.numeric.setColorMask(Resources.colors.white20);
 			Resources.fonts.numeric.drawText(hp_x, y - 3, hp_zeros);
 			Resources.fonts.numeric.setColorMask(Resources.colors.white);

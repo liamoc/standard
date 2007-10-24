@@ -19,7 +19,8 @@
 		},
 		abilities: [
 			"cure",
-			"hp10"
+			"hp10",
+			"curaga"
 		],
 		icon: SerializedResources.image.get("icons/potion.png"),
 		description: "A standard knife."

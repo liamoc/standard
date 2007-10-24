@@ -30,6 +30,7 @@ var BattleScene = Scene.extend({
 			this.charGraphics[this.charGraphics.length-1].facing = "west";
 			this.charGraphics[this.charGraphics.length-1].setDirection("west_idle");
 			Party.characters[i].graphic = this.charGraphics[this.charGraphics.length-1];
+			Party.characters[i].displayHp = Party.characters[i].stats.hp;
 		}
 	},
 	
@@ -83,6 +84,12 @@ var BattleScene = Scene.extend({
 			if (Party.characters[i].atb == 65536 && !this.commandAvailable.contains(Party.characters[i]))
 			{
 				this.requestCommand(Party.characters[i]);
+			}
+			
+			if (Party.characters[i].displayHpTick > 0)
+			{
+				Party.characters[i].displayHpTick--;
+				Party.characters[i].displayHp = Party.characters[i].displayHp + Party.characters[i].displayHpPerFrame;
 			}
 		}
 		

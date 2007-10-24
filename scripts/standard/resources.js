@@ -22,6 +22,8 @@ var Resources = Class.extend({
 		wswhite: CreateColor(242, 243, 249),
 		wswhite0: CreateColor(242, 243, 249, 0),
 		green: CreateColor(48, 208, 123),
-		darkgreen: CreateColor(8, 128, 63)
+		darkgreen: CreateColor(8, 128, 63),
+		red: CreateColor(255, 0, 0),
+		blue: CreateColor(0, 0, 255)
 	}
 });

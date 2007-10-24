@@ -1,0 +1,17 @@
+{
+	data: {
+		id: "curaga",
+		name: "Curaga",
+		type: "action",
+		action: SerializedResources.action.get("curaga.sda"),
+		action_type: "wmagic",
+		ap_required: 40,
+		mp_cost: 40,
+		flags: {
+			canUseField: true,
+			canUseBattle: true
+		},
+		description: "Restores a lot of HP to one target."
+	},
+	compilePath: "abilities/curaga.sdl"
+}

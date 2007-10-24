@@ -30,7 +30,7 @@
 		],
 		
 		usable_abilities: [
-			"cure", "hp10"
+			"cure", "hp10", "curaga"
 		],
 		
 		abilities: []

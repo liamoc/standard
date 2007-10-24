@@ -89,7 +89,13 @@ var Serializer = Class.extend({
 			this.file = new SerializerFileWrapper(this.path);
 			this.checkFileSignature();
 		}
-		return this.readObject();
+		try {
+			return this.readObject();
+		}
+		catch (e)
+		{
+			Abort("Error reading from serialized file " + this.path + ".\n\n" + e);
+		}
 	},
 	
 	close : function()
@@ -222,7 +228,7 @@ var Serializer = Class.extend({
 		var bytes = CreateByteArray(1);
 		bytes[0] = SERIALIZER_SIG_BIGINT;
 		this.file.write(bytes);
-		this.writeRawString(object.toString());
+		this.writeRawString(new String(object));
 	},
 	
 	// This is used in multiple places, so it's seperate from writeString.
@@ -374,7 +380,9 @@ var Serializer = Class.extend({
 	readObject: function()
 	{
 		// get object type
-		var type = this.file.read(1)[0];
+		var type = this.file.read(1);
+		if (!type.length) throw new SerializerException("Unable to read object. End of stream reached.");
+		type = type[0];
 		switch (type)
 		{
 			case SERIALIZER_SIG_SHORT:

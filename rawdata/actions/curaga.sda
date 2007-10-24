@@ -4,8 +4,8 @@
 		targetAllies: true,
 		targetEnemies: true,
 		defaultTarget: "ally",
-		damageType: "absolute",
-		
+		damageType: "magical_cure",
+		power: 250,
 		battleEffect: function(source, targets) {
 			var queue = new BattleQueue();
 			for (var i = 0; i < targets.length; i++)
@@ -14,7 +14,7 @@
 					maxParticles: 200,
 					incremental: true,
 					decremental: true,
-					image: Cache.getImage("potion-particle.png"),
+					image: Cache.getImage("cure-particle.png"),
 					blendMode: ADD,
 					x: targets[i].graphic.x,
 					y: targets[i].graphic.y,
@@ -42,11 +42,8 @@
 			queue.add(Event.wait, [30]);
 			queue.add(Event.currentBattle.damage, [this, source, targets]);
 			return queue;
-		},
-		
-		power: -150
-	
+		}
 	},
 	
-	compilePath: "actions/potion.sda"
+	compilePath: "actions/curaga.sda"
 }
