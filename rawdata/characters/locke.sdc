@@ -12,7 +12,7 @@
 			magic: 10,
 			defense: 10,
 			spirit: 10,
-			speed: 1000,
+			speed: 10,
 
 			evade: 10,
 			magic_evade: 10,

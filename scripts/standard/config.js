@@ -12,6 +12,6 @@ var Config = Class.extend({
 	
 	volume: {
 		music: 0,
-		sound: 10
+		sound: 0
 	}
 });

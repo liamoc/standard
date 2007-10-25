@@ -16,8 +16,7 @@
 					decremental: true,
 					image: Cache.getImage("potion-particle.png"),
 					blendMode: ADD,
-					x: targets[i].graphic.x,
-					y: targets[i].graphic.y,
+					attach: targets[i].graphic,
 					aging: {
 						min: 0.0,
 						max: 0.05,

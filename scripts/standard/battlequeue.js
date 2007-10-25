@@ -9,6 +9,14 @@ var BattleQueue = Class.extend({
 		this.lock = false;
 	},
 	
+	append: function(q)
+	{
+		for (var i = 0; i < q.queue.length; i++)
+		{
+			this.queue.push(q.queue[i]);
+		}
+	},
+	
 	add: function(f, p)
 	{
 		this.queue.push({func: f, args: p});

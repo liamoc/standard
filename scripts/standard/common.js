@@ -17,3 +17,11 @@ function PersonExists(p)
 {
 	return GetPersonList().contains(p);
 }
+
+function Bind(f, o)
+{
+	return function()
+	{
+		f.apply(o, arguments);
+	}
+}

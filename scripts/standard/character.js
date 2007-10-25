@@ -7,7 +7,8 @@ var Character = Class.extend({
 		this.stats = data.stats;
 		this.spriteset_path = data.spriteset_path;
 		this.commands = data.commands;
-
+		this.isCharacter = true;
+		this.isEnemy = false;
 		this.spriteset = Cache.getSpriteset(this.spriteset_path);
 		this.atb = 0;
 		this.statusEffects = [];

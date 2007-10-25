@@ -30,11 +30,11 @@ var TargetChooser = ScreenObject.extend({
 				case "enemy":
 					var cTarget = Event.currentBattle.monsters[this.targetId];
 					var graphic = cTarget.graphic;
-					this.targetImage.blit(graphic.center.x - 8, graphic.center.y - 24);
+					this.targetImage.blit(graphic.centerX - 8, graphic.centerY - 24);
 					break;
 				case "ally":
 					var graphic = Event.currentBattle.charGraphics[this.targetId];
-					this.targetImage.blit(graphic.center.x - 8, graphic.center.y - 24);
+					this.targetImage.blit(graphic.centerX - 8, graphic.centerY - 24);
 			}
 		}
 	},

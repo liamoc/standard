@@ -34,8 +34,8 @@ var ParticleAnimation = ScreenObject.extend({
 			}
 			this.system.initializer.setColor(params.color);
 		}
-		this.system.x = params.x;
-		this.system.y = params.y;
+		this.system.x = params.attach.x;
+		this.system.y = params.attach.y;
 		this.system.setCoordinateType(PE_SCREEN);
 		this.system.initializer.setAging(params.aging.min, params.aging.max);
 		if (params.area.type == PE_SQUARE)

@@ -8,6 +8,8 @@ var Monster = Class.extend({
 		this.stats = data.stats;
 		this.x = 0;
 		this.y = 0;
+		this.isEnemy = true;
+		this.isCharacter = false;
 	},
 	damage: function(amount)
 	{

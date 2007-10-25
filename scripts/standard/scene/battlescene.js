@@ -79,6 +79,8 @@ var BattleScene = Scene.extend({
 	{
 		for (var i = 0; i < Party.characters.length; i++)
 		{
+			if (Party.characters[i].waiting)
+				continue;
 			var atb_modifier = Party.characters[i].getAtbModifier();
 			Party.characters[i].atb = Math.min(65536, Party.characters[i].atb + (atb_modifier * (Party.characters[i].stats.speed + 20)) / 16);
 			if (Party.characters[i].atb == 65536 && !this.commandAvailable.contains(Party.characters[i]))
@@ -152,13 +154,78 @@ var BattleScene = Scene.extend({
 		for (var i = 0; i < damages.length; i++)
 		{
 			targets[i].damage(damages[i]);
-			Screen.attach(8, new DamageNumbers(damages[i], targets[i].graphic.center.x, targets[i].graphic.center.y));
+			Screen.attach(8, new DamageNumbers(damages[i], targets[i].graphic.centerX, targets[i].graphic.centerY));
 		}
 	},
 	invokeAction: function(action, source, targets, extra)
 	{
-		var queue = action.battleEffect(source, targets, extra);
+		var queue = new BattleQueue();
+		var dir = source.graphic.dir;
+		switch (dir)
+		{
+			case "east":
+			case "east_idle":
+				var op_dir = "west";
+				var dir = "east";
+				break;
+			case "west":
+			case "west_idle":
+				var op_dir = "east";
+				var dir = "west";
+				break;
+		}
+		var set_dir = Bind(source.graphic.setDirection, source.graphic);
+		if (source.isEnemy)
+		{
+			queue.add(this.flashEnemy, [source]);
+		}
+		else
+		{
+			queue.add(set_dir, [dir]);
+			queue.add(this.moveCharacterForward, [source]);
+			queue.add(set_dir, [dir + "_idle"]);
+		}
+		queue.append(action.battleEffect(source, targets, extra));
+		if (source.isCharacter)
+		{
+			queue.add(set_dir, [op_dir]);
+			queue.add(this.moveCharacterBack, [source]);
+			queue.add(set_dir, [dir + "_idle"]);
+		}
+		queue.add(function() { source.waiting = false; });
 		this.waitingCommandQueues.push(queue);
+		source.waiting = true;
+	},
+	moveCharacterForward: function(character)
+	{
+		switch (character.graphic.facing)
+		{
+			case "west":
+				character.graphic.moveTo(character.graphic.x - 32, character.graphic.y, 40);
+				break;
+		}
+		return function()
+		{
+			return character.graphic.moveFrames == 0;
+		}
+	},
+	moveCharacterBack: function(character)
+	{
+		switch (character.graphic.facing)
+		{
+			case "west":
+				character.graphic.moveTo(character.graphic.x + 32, character.graphic.y, 40);
+				break;
+		}
+		return function()
+		{
+			return character.graphic.moveFrames == 0;
+		}
+	},
+	flashEnemy: function(enemy)
+	{
+		//TODO: implement
+		return false;
 	},
 	performCommand: function(command)
 	{
