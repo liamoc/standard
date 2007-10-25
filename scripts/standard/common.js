@@ -25,3 +25,11 @@ function Bind(f, o)
 		f.apply(o, arguments);
 	}
 }
+
+Function.prototype.bind = function(o)
+{
+	return function()
+	{
+		this.apply(o, arguments);
+	}
+}

@@ -3,7 +3,10 @@
 		attack: {
 			name: "Attack",
 			type: "action",
-			action: SerializedResources.action.get("attack.sda")
+			action: SerializedResources.action.get("attack.sda"),
+			flags: {
+				basic: true
+			}
 		},
 		
 		item: {
@@ -14,6 +17,9 @@
 				enable: function(item, character) {
 					return item.flags.canUseBattle;
 				}
+			},
+			flags: {
+				basic: true
 			}
 		},
 		
@@ -25,6 +31,9 @@
 				enable: function(item, character) {
 					return item.flags.canThrow;
 				}
+			},
+			flags: {
+				basic: true
 			},
 			customAction: SerializedResources.action.get("throw.sda")
 		},
@@ -42,6 +51,9 @@
 				{
 					return item.mp_cost < character.stats.mp;
 				}
+			},
+			flags: {
+				basic: false
 			}
 		}
 	},

@@ -26,6 +26,11 @@ var Ability = Class.extend({
 		character.stats.mp = Math.max(0, character.stats.mp - this.mp_cost);
 	},
 	
+	getName: function()
+	{
+		return this.name;
+	},
+	
 	getMenuText: function()
 	{
 		return this.name;

@@ -23,6 +23,10 @@ var Item = Class.extend({
 			Party.items.remove(this);
 		}
 	},
+	getName: function()
+	{
+		return this.name;
+	},
 	getMenuText: function()
 	{
 		return this.name;

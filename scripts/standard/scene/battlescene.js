@@ -157,7 +157,8 @@ var BattleScene = Scene.extend({
 			Screen.attach(8, new DamageNumbers(damages[i], targets[i].graphic.centerX, targets[i].graphic.centerY));
 		}
 	},
-	invokeAction: function(action, source, targets, extra)
+
+	invokeAction: function(action_source, action, source, targets, extra)
 	{
 		var queue = new BattleQueue();
 		var dir = source.graphic.dir;
@@ -175,6 +176,10 @@ var BattleScene = Scene.extend({
 				break;
 		}
 		var set_dir = Bind(source.graphic.setDirection, source.graphic);
+		if (!action_source.flags.basic)
+		{
+			queue.add(this.showActionName, [action_source.getName()]);
+		}
 		if (source.isEnemy)
 		{
 			queue.add(this.flashEnemy, [source]);
@@ -208,6 +213,11 @@ var BattleScene = Scene.extend({
 		{
 			return character.graphic.moveFrames == 0;
 		}
+	},
+	showActionName: function(name)
+	{
+		Screen.attach(8, new AbilityNameWindow(name));
+		return false;
 	},
 	moveCharacterBack: function(character)
 	{
@@ -245,7 +255,7 @@ var BattleScene = Scene.extend({
 					else
 					{
 						lt.commandMenu.close();
-						lt.invokeAction(command.action, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets);
+						lt.invokeAction(command, command.action, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets);
 						lt.commandMenu.close();
 						lt.commandAvailable[lt.currentCommandMenu].atb = 0;
 						lt.commandAvailable.splice(lt.currentCommandMenu, 1);
@@ -336,11 +346,11 @@ var BattleScene = Scene.extend({
 								submenu.close();
 								if (command.customAction)
 								{
-									lt.invokeAction(command.customAction, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets, submenu.result);
+									lt.invokeAction(command, command.customAction, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets, submenu.result);
 								}
 								else
 								{
-									lt.invokeAction(submenu.result.action, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets);
+									lt.invokeAction(submenu.result, submenu.result.action, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets);
 								}
 								lt.commandAvailable[lt.currentCommandMenu].atb = 0;
 								lt.commandAvailable.splice(lt.currentCommandMenu, 1);

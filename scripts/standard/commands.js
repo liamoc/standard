@@ -9,6 +9,10 @@ var Commands = Class.extend({
 		for (var cid in data)
 		{
 			this[cid] = data[cid];
+			this[cid].getName = function()
+			{
+				return this[cid].name;
+			}
 		}
 	}
 });
