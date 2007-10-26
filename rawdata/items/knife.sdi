@@ -19,7 +19,6 @@
 		},
 		abilities: [
 			"cure",
-			"hp10",
 			"curaga"
 		],
 		icon: SerializedResources.image.get("icons/potion.png"),

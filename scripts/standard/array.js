@@ -13,6 +13,11 @@ Array.prototype.removeIf = function(predicate)
 	return count;
 }
 
+Array.prototype.random = function()
+{
+	return this[Random(0, this.length - 1)];
+}
+
 Array.prototype.remove = function(value)
 {
 	for (var i = 0; i < this.length; i++)

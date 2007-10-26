@@ -68,7 +68,14 @@ var PartyList = Window.extend({
 			var atbbmw = 60;
 			var atbbw = Party.characters[i].atb / 65536 * atbbmw;
 			var atb_x = 240;
-			Rectangle(atb_x, y + 4, atbbw, 4, Resources.colors.green);
+			var atb_colour;
+			if (Party.characters[i].waiting)
+				atb_colour = Resources.colors.white;
+			else if (Party.characters[i].atb == 65536)
+				atb_colour = Resources.colors.lightgreen;
+			else
+				atb_colour = Resources.colors.green;
+			Rectangle(atb_x, y + 4, atbbw, 4, atb_colour);
 			Rectangle(atb_x + atbbw, y + 4, atbbmw - atbbw, 4, Resources.colors.darkgreen);			
 			
 		}

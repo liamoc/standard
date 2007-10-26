@@ -3,21 +3,67 @@
 		image: SerializedResources.image.get("monsters/zombie_demon.png"),
 		name: "Lich",
 		stats: {
-			level: 10,
+			level: 1,
 			
-			hp: 500,
-			mp: 50,
-			maxhp: 500,
-			maxmp: 50,
+			hp: 100,
+			mp: 20,
+			maxhp: 100,
+			maxmp: 20,
 			
-			strength: 10,
-			magic: 10,
-			defense: 10,
-			spirit: 10,
-			speed: 10,
+			strength: 23,
+			magic: 14,
+			defense: 20,
+			spirit: 9,
+			speed: 13,
 
 			evade: 10,
 			magic_evade: 10,
+		},
+		abilities: {
+			"slash": {
+				name: "Slash",
+				action: SerializedResources.action.get("slash.sda"),
+			},
+			"attack": {
+				name: "Attack",
+				action: SerializedResources.action.get("attack.sda"),
+				flags: {
+					basic: true
+				}
+			}
+		},
+		
+		ai: {
+			turn: function()
+			{
+				var ability = false;
+				if (this.state.aggressive)
+				{
+					if (Random(0, 100) < 60)
+					{
+						ability = this.abilities["slash"];
+					}
+					else
+					{
+						ability = this.abilities["attack"];
+					}
+				}
+				else
+				{
+					ability = this.abilities["attack"];
+				}
+				var target = Party.characters.filter(function(character) {
+					return character.stats.hp > 0;
+				}).random();
+				Event.currentBattle.invokeAction(ability, ability.action, this, [target], false);
+			},
+			tick: function()
+			{
+				if (this.stats.hp < 200)
+				{
+					this.state.aggressive = true;
+				}
+			}
 		}
 	},
 	

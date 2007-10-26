@@ -2,9 +2,11 @@ var MonsterGraphic = ScreenObject.extend({
 	constructor: function(monster)
 	{
 		this.monster = monster;
+		this.flash_frames = 8;
 		this.image = this.monster.image;
 		this.x = monster.x;
 		this.y = monster.y;
+		this.flashing = false;
 		this.center = {
 
 		};
@@ -15,6 +17,19 @@ var MonsterGraphic = ScreenObject.extend({
 	},
 	render: function()
 	{
-		this.image.blit(this.x, this.y);
-	}
+		if (this.flashing)
+			this.image.blitMask(this.x, this.y, CreateColor(0, 0, 0, 255));
+		else
+			this.image.blit(this.x, this.y);
+	},
+	flash: function()
+	{
+		this.flashing = true;
+		Standard.addTimer(this, this.endFlash, this.flash_frames);
+	},
+	endFlash: function()
+	{
+		this.flashing = false;
+		Standard.removeTimer(this, this.endFlash);
+	},
 });

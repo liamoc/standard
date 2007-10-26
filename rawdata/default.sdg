@@ -4,7 +4,8 @@
 			money: 0,
 			items: [
 				SerializedResources.item.get("potion.sdi", 10),
-				SerializedResources.item.get("knife.sdi", 99)
+				SerializedResources.item.get("knife.sdi", 99),
+				SerializedResources.item.get("ironhelm.sdi", 50)
 			],
 			characters: [
 				SerializedResources.character.get("locke.sdc"),

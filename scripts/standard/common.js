@@ -28,8 +28,9 @@ function Bind(f, o)
 
 Function.prototype.bind = function(o)
 {
+	var func = this;
 	return function()
 	{
-		this.apply(o, arguments);
+		func.apply(o, arguments);
 	}
 }

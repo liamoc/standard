@@ -95,6 +95,21 @@ var BattleScene = Scene.extend({
 			}
 		}
 		
+		for (var i = 0; i < this.monsters.length; i++)
+		{
+		
+			this.monsters[i].ai.tick();
+		
+			if (this.monsters[i].waiting)
+				continue;
+			var atb_modifier = this.monsters[i].getAtbModifier();
+			this.monsters[i].atb = Math.min(65536, this.monsters[i].atb + (atb_modifier * (this.monsters[i].stats.speed + 20)) / 16);
+			if (this.monsters[i].atb == 65536)
+			{
+				this.monsters[i].ai.turn();
+			}
+		}
+		
 		if ((!this.currentCommandQueue || this.currentCommandQueue.finished) && this.waitingCommandQueues.length)
 		{
 			this.currentCommandQueue = this.waitingCommandQueues.splice(0, 1)[0];
@@ -176,13 +191,14 @@ var BattleScene = Scene.extend({
 				break;
 		}
 		var set_dir = Bind(source.graphic.setDirection, source.graphic);
-		if (!action_source.flags.basic)
+		if (!action_source.flags || !action_source.flags.basic)
 		{
-			queue.add(this.showActionName, [action_source.getName()]);
+			queue.add(this.showActionName, [action_source.name]);
 		}
 		if (source.isEnemy)
 		{
 			queue.add(this.flashEnemy, [source]);
+			queue.add(Event.wait, [30]);
 		}
 		else
 		{
@@ -197,7 +213,7 @@ var BattleScene = Scene.extend({
 			queue.add(this.moveCharacterBack, [source]);
 			queue.add(set_dir, [dir + "_idle"]);
 		}
-		queue.add(function() { source.waiting = false; });
+		queue.add(function() { source.waiting = false; source.atb = 0; });
 		this.waitingCommandQueues.push(queue);
 		source.waiting = true;
 	},
@@ -235,7 +251,11 @@ var BattleScene = Scene.extend({
 	flashEnemy: function(enemy)
 	{
 		//TODO: implement
-		return false;
+		enemy.graphic.flash();
+		return function()
+		{
+			return !enemy.graphic.flashing;
+		}
 	},
 	performCommand: function(command)
 	{
@@ -257,7 +277,6 @@ var BattleScene = Scene.extend({
 						lt.commandMenu.close();
 						lt.invokeAction(command, command.action, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets);
 						lt.commandMenu.close();
-						lt.commandAvailable[lt.currentCommandMenu].atb = 0;
 						lt.commandAvailable.splice(lt.currentCommandMenu, 1);
 						if (lt.currentCommandMenu >= lt.commandAvailable.length)
 							lt.currentCommandMenu = lt.commandAvailable.length;
@@ -352,7 +371,6 @@ var BattleScene = Scene.extend({
 								{
 									lt.invokeAction(submenu.result, submenu.result.action, lt.commandAvailable[lt.currentCommandMenu], targetChooser.targets);
 								}
-								lt.commandAvailable[lt.currentCommandMenu].atb = 0;
 								lt.commandAvailable.splice(lt.currentCommandMenu, 1);
 								if (lt.currentCommandMenu >= lt.commandAvailable.length)
 									lt.currentCommandMenu = lt.commandAvailable.length;

@@ -15,7 +15,8 @@
 				
 				var source_strength = source.getStat("strength");
 				
-				var strength = source_strength + Random(source_strength / 2, source_strength);
+				var strength = source_strength * (source.multiplier ? source.multiplier : 1) + Random(source_strength / 2, source_strength);
+				
 				var modifier = (source.stats.level * source_strength) / 128 + 2;
 				var defense = targets[i].getStat("defense");
 				//Abort(strength + "," + modifier + "," + defense);
@@ -44,7 +45,7 @@
 			var damages = [];
 			for (var i = 0; i < targets.length; i++)
 			{
-				var source_strength = item.stats.strength * 3;
+				var source_strength = item.stats.strength * 10;
 				
 				var strength = source_strength + Random(source_strength / 2, source_strength);
 				var modifier = (source.stats.level * source_strength) / 128;

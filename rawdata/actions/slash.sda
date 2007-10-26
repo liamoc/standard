@@ -1,0 +1,17 @@
+{
+	data: {
+		target: "single",
+		targetAllies: true,
+		targetEnemies: true,
+		defaultTarget: "enemy",
+		damageType: "physical",
+		multiplier: 3,
+		battleEffect: function(source, targets) {
+			var queue = new BattleQueue();
+			queue.add(Event.currentBattle.damage, [this, source, targets]);
+			return queue;
+		}
+	},
+	
+	compilePath: "actions/slash.sda"
+}

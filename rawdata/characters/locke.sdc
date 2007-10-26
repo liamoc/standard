@@ -2,11 +2,11 @@
 	data: {
 		name: "Locke",
 		stats: {
-			hp: 450,
-			maxhp: 450,
-			mp: 90,
-			maxmp: 90,
-			level: 15,
+			hp: 95,
+			maxhp: 95,
+			mp: 32,
+			maxmp: 32,
+			level: 1,
 			
 			strength: 10,
 			magic: 10,
