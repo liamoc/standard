@@ -233,12 +233,10 @@ Event.addFunction("movePerson", function(person, queue, nowait)
 		{
 			i++;
 			cmd += queue.charAt(i);
-			log.write("Face: " + cmd);
 			QueuePersonCommand(person, simple_map[cmd], false);
 		}
 		else
 		{
-			log.write("Move: " + cmd);
 			if (cmd != last_cmd && simple_map["f" + cmd])
 			{
 				QueuePersonCommand(person, simple_map["f" + cmd], false);

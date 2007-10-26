@@ -13,8 +13,16 @@ var Screen = Class.extend({
 	attach: function(layer, object)
 	{
 		if (!this.layers[layer]) this.layers[layer] = [];
-		this.layers[layer].push(object);
-		object.onAdd();
+		if (object instanceof Array)
+		{
+			this.layers[layer] = this.layers[layer].concat(object);
+			object.forEach(function (o) { o.onAdd(); });
+		}
+		else
+		{
+			this.layers[layer].push(object);
+			object.onAdd();
+		}
 	},
 	detachAll: function()
 	{
@@ -29,10 +37,24 @@ var Screen = Class.extend({
 	},
 	detach: function(object)
 	{
-		object.onRemove();
-		for (var i = 0; i < this.layers.length; i++)
+		if (object instanceof Array)
 		{
-			if (this.layers[i]) this.layers[i].remove(object);
+			for (var i = 0; i < object.length; i++)
+			{
+				object[i].onRemove();
+				for (var j = 0; j < this.layers.length; i++)
+				{
+					if (this.layers[j]) this.layers[j].remove(object[i]);
+				}
+			}
+		}
+		else
+		{
+			object.onRemove();
+			for (var i = 0; i < this.layers.length; i++)
+			{
+				if (this.layers[i]) this.layers[i].remove(object);
+			}
 		}
 	},
 	

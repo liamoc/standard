@@ -64,6 +64,8 @@ var TitleScene = Scene.extend({
 				CreatePerson("hero", Party.characters[0].spriteset_path, false);
 			}
 			Standard.attachInput("hero");
+			AttachCamera("hero");
+			IgnoreTileObstructions("hero", true);
 			Standard.changeScene(new MapScene());
 			Map.change(Settings.get("startMap"));
 			

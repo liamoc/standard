@@ -60,9 +60,9 @@ var Torch = ScreenObject.extend({
 		
 		this.image.zoomBlit(imagex, imagey, scale);
 		
-		if (imagex > 0) Rectangle(0, 0, imagex, 240, Resources.colors.black);
+		/*if (imagex > 0) Rectangle(0, 0, imagex, 240, Resources.colors.black);
 		if (imagey > 0) Rectangle(0, 0, 320, imagey, Resources.colors.black);
 		if (imagex < 0) Rectangle(imagex + imagew, 0, imagex + imagew, 240, Resources.colors.black);
-		if (imagey < 0) Rectangle(0, imagey + imageh, 320, imagey + imageh, Resources.colors.black);
+		if (imagey < 0) Rectangle(0, imagey + imageh, 320, imagey + imageh, Resources.colors.black);*/
 	}
 });

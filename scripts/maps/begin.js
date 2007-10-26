@@ -1,4 +1,10 @@
 {
+	vars: {
+		lights: [
+			new Light(7 * 16 + 8, 7 * 16 + 8, 0)
+		]
+	},
+	
 	enter: function()
 	{
 		if (!State.displayedMessage)
@@ -16,11 +22,12 @@
 			eq.start();
 			State.displayedMessage = true;
 		}
+		Screen.attach(3, this.vars.lights);
 	},
 	
 	leave: function()
 	{
-		
+		Screen.detach(this.vars.lights);
 	},
 	
 	test_1: {

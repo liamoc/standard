@@ -65,7 +65,7 @@ var Map = Class.extend({
 		}
 	},
 	
-	change: function(map)
+	change: function(map, skipAdjustments)
 	{
 		Sounds.stopMusic();
 		var mapname = Path.baseName(map);
@@ -79,5 +79,14 @@ var Map = Class.extend({
 		{
 			Sounds.playMusic(Strings.get("music"));
 		}
+		/*if (!skipAdjustments)
+		{
+			var people = GetPersonList();
+			for (var i = 0; i < people.length; i++)
+			{
+				SetPersonX(people[i], GetPersonX(people[i]) + 1);
+				SetPersonY(people[i], GetPersonY(people[i]) + 1);
+			}
+		}*/
 	}
 });

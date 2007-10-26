@@ -86,9 +86,9 @@ var SaveManager = Class.extend({
 				CreatePerson("hero", Party.characters[0].spriteset_path, false);
 			}
 			Standard.attachInput("hero");
-		
+			AttachCamera("hero");
 			Standard.changeScene(new MapScene());
-			Map.change(gameData.map);
+			Map.change(gameData.map, true);
 			for (var i = 0; i < gameData.personData.length; i++)
 			{
 				SetPersonX(gameData.personData[i].p, gameData.personData[i].x);
