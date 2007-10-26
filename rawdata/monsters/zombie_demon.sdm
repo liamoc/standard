@@ -5,10 +5,10 @@
 		stats: {
 			level: 1,
 			
-			hp: 100,
-			mp: 20,
-			maxhp: 100,
-			maxmp: 20,
+			hp: 2000,
+			mp: 240,
+			maxhp: 2000,
+			maxmp: 240,
 			
 			strength: 23,
 			magic: 14,
@@ -59,9 +59,14 @@
 			},
 			tick: function()
 			{
-				if (this.stats.hp < 200)
+				if (!this.state.aggressive && this.stats.hp < 1000)
 				{
 					this.state.aggressive = true;
+					
+					var queue = new BattleQueue();
+					queue.pauseBattle = true;
+					queue.add(Event.currentBattle.showMessage, ["Give up!\nYou'll never defeat me!"]);
+					Event.currentBattle.insertQueue(queue);
 				}
 			}
 		}

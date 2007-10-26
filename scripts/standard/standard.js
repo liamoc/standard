@@ -75,6 +75,7 @@ RequireScript("standard/screenobjects/targetchooser.js");
 RequireScript("standard/screenobjects/damagenumbers.js");
 RequireScript("standard/screenobjects/particleanimation.js");
 RequireScript("standard/screenobjects/abilitynamewindow.js");
+RequireScript("standard/screenobjects/battlemessage.js");
 
 // Include all the Scene objects
 RequireScript("standard/scene/scene.js");

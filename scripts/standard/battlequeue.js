@@ -2,6 +2,7 @@ var BattleQueue = Class.extend({
 	queue: [],
 	position: 0,
 	lock: false,
+	pauseBattle: false,
 	id: "BattleQueue",
 	constructor: function()
 	{
@@ -25,6 +26,10 @@ var BattleQueue = Class.extend({
 	start: function()
 	{
 		Standard.addTimer(this, this.check, 1);
+		if (this.pauseBattle)
+		{
+			Event.currentBattle.waiting = true;
+		}
 	},
 	
 	check: function()
@@ -35,6 +40,7 @@ var BattleQueue = Class.extend({
 			if (!item)
 			{
 				this.finished = true;
+				Event.currentBattle.waiting = false;
 				Standard.removeTimer(this, this.check);
 			}
 		}

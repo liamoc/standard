@@ -24,6 +24,7 @@ var BattleScene = Scene.extend({
 		this.charGraphics = [];
 		this.waitingCommandQueues = [];
 		this.currentCommandQueue = false;
+		this.waiting = false;
 		for (var i = 0; i < Party.characters.length; i++)
 		{
 			this.charGraphics.push(new CharacterGraphic(Party.characters[i], 260 + i * 8, 72 + i * 20));
@@ -77,36 +78,39 @@ var BattleScene = Scene.extend({
 	},
 	tick: function()
 	{
-		for (var i = 0; i < Party.characters.length; i++)
+		if (!this.waiting)
 		{
-			if (Party.characters[i].waiting)
-				continue;
-			var atb_modifier = Party.characters[i].getAtbModifier();
-			Party.characters[i].atb = Math.min(65536, Party.characters[i].atb + (atb_modifier * (Party.characters[i].stats.speed + 20)) / 16);
-			if (Party.characters[i].atb == 65536 && !this.commandAvailable.contains(Party.characters[i]))
+			for (var i = 0; i < Party.characters.length; i++)
 			{
-				this.requestCommand(Party.characters[i]);
+				if (Party.characters[i].waiting)
+					continue;
+				var atb_modifier = Party.characters[i].getAtbModifier();
+				Party.characters[i].atb = Math.min(65536, Party.characters[i].atb + (atb_modifier * (Party.characters[i].stats.speed + 20)) / 16);
+				if (Party.characters[i].atb == 65536 && !this.commandAvailable.contains(Party.characters[i]))
+				{
+					this.requestCommand(Party.characters[i]);
+				}
+				
+				if (Party.characters[i].displayHpTick > 0)
+				{
+					Party.characters[i].displayHpTick--;
+					Party.characters[i].displayHp = Party.characters[i].displayHp + Party.characters[i].displayHpPerFrame;
+				}
 			}
 			
-			if (Party.characters[i].displayHpTick > 0)
+			for (var i = 0; i < this.monsters.length; i++)
 			{
-				Party.characters[i].displayHpTick--;
-				Party.characters[i].displayHp = Party.characters[i].displayHp + Party.characters[i].displayHpPerFrame;
-			}
-		}
-		
-		for (var i = 0; i < this.monsters.length; i++)
-		{
-		
-			this.monsters[i].ai.tick();
-		
-			if (this.monsters[i].waiting)
-				continue;
-			var atb_modifier = this.monsters[i].getAtbModifier();
-			this.monsters[i].atb = Math.min(65536, this.monsters[i].atb + (atb_modifier * (this.monsters[i].stats.speed + 20)) / 16);
-			if (this.monsters[i].atb == 65536)
-			{
-				this.monsters[i].ai.turn();
+			
+				this.monsters[i].ai.tick();
+			
+				if (this.monsters[i].waiting)
+					continue;
+				var atb_modifier = this.monsters[i].getAtbModifier();
+				this.monsters[i].atb = Math.min(65536, this.monsters[i].atb + (atb_modifier * (this.monsters[i].stats.speed + 20)) / 16);
+				if (this.monsters[i].atb == 65536)
+				{
+					this.monsters[i].ai.turn();
+				}
 			}
 		}
 		
@@ -172,8 +176,11 @@ var BattleScene = Scene.extend({
 			Screen.attach(8, new DamageNumbers(damages[i], targets[i].graphic.centerX, targets[i].graphic.centerY));
 		}
 	},
-
-	invokeAction: function(action_source, action, source, targets, extra)
+	insertQueue: function(queue)
+	{
+		this.waitingCommandQueues.unshift(queue);
+	},
+	invokeAction: function(action_source, action, source, targets, extra, instant)
 	{
 		var queue = new BattleQueue();
 		var dir = source.graphic.dir;
@@ -214,7 +221,10 @@ var BattleScene = Scene.extend({
 			queue.add(set_dir, [dir + "_idle"]);
 		}
 		queue.add(function() { source.waiting = false; source.atb = 0; });
-		this.waitingCommandQueues.push(queue);
+		if (instant)
+			this.waitingCommandQueues.unshift(queue);
+		else
+			this.waitingCommandQueues.push(queue);
 		source.waiting = true;
 	},
 	moveCharacterForward: function(character)
@@ -234,6 +244,22 @@ var BattleScene = Scene.extend({
 	{
 		Screen.attach(8, new AbilityNameWindow(name));
 		return false;
+	},
+	showMessage: function(text)
+	{
+		var msg = new BattleMessage(text);
+		Screen.attach(8, msg);
+		return function()
+		{
+			if (msg.finished)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	},
 	moveCharacterBack: function(character)
 	{
